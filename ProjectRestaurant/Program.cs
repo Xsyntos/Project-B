@@ -6,7 +6,8 @@ namespace ProjectRestaurant
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello!! World!");
+            string a = "Test";
+            Console.WriteLine(a);
         }
     }
 }
