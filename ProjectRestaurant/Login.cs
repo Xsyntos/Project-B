@@ -14,7 +14,7 @@ namespace ProjectRestaurant
             Console.WriteLine("Please enter your password: ");
             string password = Console.ReadLine();
 
-            //Need JSON FILE to check
+            //Need JSON FILE to check username and pass
             /*if (username == ... && password == ...) {
                 Console.WriteLine("Succesfuly logged in");
             else
