@@ -1,0 +1,13 @@
+D:\school\Project\ProjectRestaurant\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.csprojAssemblyReference.cache
+D:\school\Project\ProjectRestaurant\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.AssemblyInfoInputs.cache
+D:\school\Project\ProjectRestaurant\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.AssemblyInfo.cs
+D:\school\Project\ProjectRestaurant\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.csproj.CoreCompileInputs.cache
+D:\school\Project\ProjectRestaurant\ProjectRestaurant\ProjectRestaurant\bin\Debug\netcoreapp3.1\ProjectRestaurant.exe
+D:\school\Project\ProjectRestaurant\ProjectRestaurant\ProjectRestaurant\bin\Debug\netcoreapp3.1\ProjectRestaurant.deps.json
+D:\school\Project\ProjectRestaurant\ProjectRestaurant\ProjectRestaurant\bin\Debug\netcoreapp3.1\ProjectRestaurant.runtimeconfig.json
+D:\school\Project\ProjectRestaurant\ProjectRestaurant\ProjectRestaurant\bin\Debug\netcoreapp3.1\ProjectRestaurant.runtimeconfig.dev.json
+D:\school\Project\ProjectRestaurant\ProjectRestaurant\ProjectRestaurant\bin\Debug\netcoreapp3.1\ProjectRestaurant.dll
+D:\school\Project\ProjectRestaurant\ProjectRestaurant\ProjectRestaurant\bin\Debug\netcoreapp3.1\ProjectRestaurant.pdb
+D:\school\Project\ProjectRestaurant\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.dll
+D:\school\Project\ProjectRestaurant\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.pdb
+D:\school\Project\ProjectRestaurant\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.genruntimeconfig.cache
