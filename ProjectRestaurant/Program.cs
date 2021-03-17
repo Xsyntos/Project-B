@@ -17,6 +17,8 @@ namespace ProjectRestaurant
             json_table.displayTable();
             json_reservation.displayReservation();
             // json_customer.displayUser();
+            // Registration.RegistrationFirstVersion();
+            Class1.Login();
         }
     }
 }
