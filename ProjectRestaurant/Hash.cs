@@ -9,7 +9,7 @@ namespace ProjectRestaurant
     public class Hash
     {
         // Get function receives an input and returns a hash of the input.
-        public string Get(string text)
+        public static string Encrypt(string text)
         {
             var bytes = Encoding.UTF8.GetBytes(text);
             SHA256Managed hashstring = new SHA256Managed();
@@ -20,6 +20,11 @@ namespace ProjectRestaurant
                 hashString += String.Format("{0:x2}", x);
             }
             return hashString;
+        }
+
+        public string Decrypt()
+        {
+            return "";
         }
     }
 }
