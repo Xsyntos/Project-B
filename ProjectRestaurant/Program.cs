@@ -6,8 +6,8 @@ namespace ProjectRestaurant
     {
         static void Main(string[] args)
         {
-            string a = "Test";
-            Console.WriteLine(a);
+            var Menu = new Menu();
+            Menu.start();
         }
     }
 }
