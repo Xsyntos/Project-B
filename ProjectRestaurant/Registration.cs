@@ -28,6 +28,7 @@ namespace ProjectRestaurant
                 /// Warnings 
                 if (Password.Length == repeat.Length && Password.Length > 7 && repeat.Length > 7)
                 {
+                    json_customer.newUser(username, Hash.Encrypt(Password), "123");
                     Console.WriteLine("Successfully registered");
                 }
                 else
