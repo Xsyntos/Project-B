@@ -11,7 +11,7 @@ namespace ProjectRestaurant
 
         public void start()
         {
-            //Title = "Example of the restaurant menu";
+           // Title = "Example of the restaurant menu";
 
 
 
