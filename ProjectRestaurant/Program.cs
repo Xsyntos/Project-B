@@ -8,6 +8,9 @@ namespace ProjectRestaurant
     {
         static void Main(string[] args)
         {
+
+            var Menu = new Menu();
+            Menu.start();
             json_customer.customerinit();
             json_table.tableInit();
             json_reservation.reservationInit();
@@ -19,6 +22,7 @@ namespace ProjectRestaurant
             // json_customer.displayUser();
             // Registration.RegistrationFirstVersion();
             Class1.Login();
+
         }
     }
 }
