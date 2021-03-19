@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 
 
+
 namespace ProjectRestaurant
 {
     class Menu
     {
+
         public void start()
         {
             //Title = "Example of the restaurant menu";
@@ -58,8 +60,7 @@ Welcome to our restaurant  ";
         }
         private void Signup()
         {
-
-
+            Console.WriteLine("Signin");
         }
         private void ContineuAsGuest()
         {
@@ -71,7 +72,8 @@ Welcome to our restaurant  ";
 
         }
     }
-        }
+
+}
 
      
     

@@ -4,7 +4,7 @@ using System.Text;
 using static System.Console;
 
 
-namespace Consolerestaurantapp
+namespace ProjectRestaurant
 {
     class Game
     {
