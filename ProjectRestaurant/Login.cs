@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProjectRestaurant
 {
-    class Class1
+    class login
     {
         public static void Login()
         {

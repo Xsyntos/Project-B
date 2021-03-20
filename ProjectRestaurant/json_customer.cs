@@ -96,7 +96,7 @@ namespace ProjectRestaurant
             return data;
         }
 
-        public static void displayUser()
+        public static void displayUsers()
         {
             var data = getUserlist();
             foreach(var x in data)
@@ -105,6 +105,20 @@ namespace ProjectRestaurant
                 Console.WriteLine($"ID: {x.Id}");
                 Console.WriteLine("-------------------------------");
             }
+        }
+
+        public static user getUser(int id)
+        {
+            var data = getUserlist();
+            for(int i = 0; i < data.Count; i++)
+            {
+                if(data[i].Id == id)
+                {
+                    return data[i];
+                }
+                
+            }
+            return new user();
         }
 
     }
