@@ -30,6 +30,7 @@ namespace ProjectRestaurant
 
             Game mainMenu = new Game(prompt, optionText);
             int selectedIndex = mainMenu.Run();
+            
             options[selectedIndex].func();
         }
     }

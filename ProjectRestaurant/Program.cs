@@ -8,9 +8,11 @@ namespace ProjectRestaurant
     {
         static void Main(string[] args)
         {
-            json_reservation.reservationInit();
-          //  json_table.getFreeTable(new DateTime(2021, 3, 20, 12, 0, 0));
-            menuReg.reservationMenu1();
+        json_reservation.reservationInit();
+            //  json_table.getFreeTable(new DateTime(2021, 3, 20, 12, 0, 0));
+            menuReg.mainMenu();
+        //menuReg.reservationMenu1(0)();
+
            //var a = json_table.getFreeTable(new DateTime(2021, 3, 20, 12, 0, 0));
            //foreach (var x in json_reservation.reservationsofdate(new DateTime(2021, 3, 20, 12, 0, 0))) {
           //  Console.WriteLine(x.Id); }

@@ -7,26 +7,44 @@ namespace ProjectRestaurant
     class menuReg
     {
         //Reservation menu
-        public static void reservationMenu1()
+        
+        public static Action reservationMenu1(int y)
         {
 
+            void resv() { 
             var list = new List<option>();
-                for(int i = 1; i <=14; i++)
-            {
-                list.Add(new option {
-                    printToConsole = $"{DateTime.Now.AddDays((double)i).Day}-{DateTime.Now.AddDays((double)i).Month}-{DateTime.Now.AddDays((double)i).Year}, 12 PM",
-                    func = reservationMenuDay(new DateTime(DateTime.Now.AddDays((double)i).Year, DateTime.Now.AddDays((double)i).Month, DateTime.Now.AddDays((double)i).Day, 12, 0, 0))
-                }
-                );
+            for (int i = 1; i <= 7; i++)
+                {
+                    list.Add(new option
+                    {
+                        printToConsole = $"{DateTime.Now.AddDays((double)i + (y * 7)).Day}-{DateTime.Now.AddDays((double)i + (y * 7)).Month}-{DateTime.Now.AddDays((double)i + (y * 7)).Year}, 12 PM",
+                        func = reservationMenuDay(new DateTime(DateTime.Now.AddDays((double)i + (y * 7)).Year, DateTime.Now.AddDays((double)i + (y * 7)).Month, DateTime.Now.AddDays((double)i + (y * 7)).Day, 12, 0, 0))
+                    }
+                    );
+                    list.Add(new option
+                    {
+                        printToConsole = $"{DateTime.Now.AddDays((double)i + (y * 7)).Day}-{DateTime.Now.AddDays((double)i + (y * 7)).Month}-{DateTime.Now.AddDays((double)i + (y * 7)).Year}, 6 PM",
+                        func = reservationMenuDay(new DateTime(DateTime.Now.AddDays((double)i + (y * 7)).Year, DateTime.Now.AddDays((double)i + (y * 7)).Month, DateTime.Now.AddDays((double)i + (y * 7)).Day, 18, 0, 0))
+                    }
+            
+
+    // TO DO: ga terug knop
+    );
+            }
                 list.Add(new option
                 {
-                    printToConsole = $"{DateTime.Now.AddDays((double)i).Day}-{DateTime.Now.AddDays((double)i).Month}-{DateTime.Now.AddDays((double)i).Year}, 6 PM",
-                    func = reservationMenuDay(new DateTime(DateTime.Now.AddDays((double)i).Year, DateTime.Now.AddDays((double)i).Month, DateTime.Now.AddDays((double)i).Day, 18, 0, 0))
-                }
+                    printToConsole = "Next Week",
+                    func = reservationMenu1(y + 1)
+                });
 
-                // TO DO: ga terug knop
-);      
-            }
+                if(y > 0)
+                {
+                    list.Add(new option
+                    {
+                        printToConsole = "Previous Week",
+                        func = reservationMenu1(y - 1)
+                    });
+                }
 
             Menu menu = new Menu
             {
@@ -35,6 +53,8 @@ namespace ProjectRestaurant
             };
             menu.RunMenu();
         }
+            return resv;
+    }
         public static Action reservationMenuDay(DateTime i)
         {
             var date = i; 
@@ -62,7 +82,13 @@ namespace ProjectRestaurant
                         }
                         );
                     }
+
                 }
+                option.Add(new option
+                {
+                    printToConsole = "Return",
+                    func = reservationMenu1(0)
+                });
                 Menu menu = new Menu
                 {
                     options = option.ToArray(),
@@ -83,7 +109,33 @@ namespace ProjectRestaurant
             return MakeReservationMenu;
         }
         // Next menu:
-
+        public static void mainMenu()
+        {
+            var optie = new option[] {
+                new option
+                {
+                    printToConsole = "Log-in"
+                },
+                new option
+                {
+                    printToConsole =  "Registrate" 
+                },
+                new option
+                {
+                    printToConsole = "Log-in as Guest"
+                },
+                new option
+                {
+                    printToConsole = "Quit"
+                }
+            };
+            var menu = new Menu
+            {
+                options = optie,
+                prefix = "Welcome to our Restaurant"
+            };
+            menu.RunMenu();
+        }
 
 
     }
