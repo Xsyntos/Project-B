@@ -45,6 +45,11 @@ namespace ProjectRestaurant
                         func = reservationMenu1(y - 1)
                     });
                 }
+                list.Add(new option
+                {
+                    printToConsole = "Return",
+                    func = mainCustomermenu
+                });
 
             Menu menu = new Menu
             {
@@ -83,6 +88,7 @@ namespace ProjectRestaurant
                         );
                     }
 
+
                 }
                 option.Add(new option
                 {
@@ -105,6 +111,7 @@ namespace ProjectRestaurant
             void MakeReservationMenu()
             {
                 json_reservation.makeReservation(date, client_variable.user, table);
+                mainCustomermenu();
             }
             return MakeReservationMenu;
         }
@@ -114,11 +121,13 @@ namespace ProjectRestaurant
             var optie = new option[] {
                 new option
                 {
-                    printToConsole = "Log-in"
+                    printToConsole = "Log-in",
+                    func = login.Login
                 },
                 new option
                 {
-                    printToConsole =  "Registrate" 
+                    printToConsole =  "Registrate" ,
+                    func = Registration.RegistrationFirstVersion
                 },
                 new option
                 {
@@ -135,6 +144,65 @@ namespace ProjectRestaurant
                 prefix = "Welcome to our Restaurant"
             };
             menu.RunMenu();
+        }
+        public static void mainCustomermenu()
+        {
+            var optie = new option[]
+            {
+                new option
+                {
+                    printToConsole = "Make a Reservation",
+                    func = reservationMenu1(0)
+                },
+                new option
+                {
+                    printToConsole = "Check reservations"
+                },
+                new option
+                {
+                    printToConsole = "Change account settings"
+                },
+                new option
+                {
+                    printToConsole = "Log-out",
+                    func = mainMenu
+                }
+
+            };
+            var menu = new Menu
+            {
+                prefix = "Welcome to our Restaurant",
+                options = optie
+            };
+            menu.RunMenu();
+        }
+        public static void mainAdminmenu()
+        {
+            var x = new option[]
+            {
+               new option
+               {
+                   printToConsole = "Check all reservations"
+               },
+               new option
+               {
+                   printToConsole = "Tables"
+               },
+               new option
+               {
+                   printToConsole = "Log-out",
+                   func = mainMenu
+               }
+
+        
+            };
+            var menu = new Menu
+            {
+                prefix = "Welcome Boss",
+                options = x
+            };
+            menu.RunMenu();
+
         }
 
 
