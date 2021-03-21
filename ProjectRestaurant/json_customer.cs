@@ -29,7 +29,7 @@ namespace ProjectRestaurant
                 {
                     Id = 1,
                     username = "Admin",
-                    password = "admin",
+                    password = Hash.Encrypt("admin"),
                     creditcard = "-admin-",
                     role = "admin"
                 });

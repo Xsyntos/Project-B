@@ -27,6 +27,15 @@ namespace ProjectRestaurant
                 {
                     Console.WriteLine("Log in successful!");
                     login += 1;
+                    client_variable.user = x;
+                    if (x.role == "customer")
+                    {
+                        menuReg.mainCustomermenu();
+                    }
+                    if (x.role == "admin")
+                    {
+                        menuReg.mainAdminmenu();
+                    }
 
                 }
             }

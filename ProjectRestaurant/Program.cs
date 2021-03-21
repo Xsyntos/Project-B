@@ -9,6 +9,7 @@ namespace ProjectRestaurant
         static void Main(string[] args)
         {
         json_reservation.reservationInit();
+        json_customer.customerinit();
             //  json_table.getFreeTable(new DateTime(2021, 3, 20, 12, 0, 0));
             menuReg.mainMenu();
         //menuReg.reservationMenu1(0)();
