@@ -4,24 +4,38 @@ using System.Text;
 
 namespace ProjectRestaurant
 {
-    class menu
+
+    class login
+
     {
         public static void Login()
         {
             // login
+
+            int login = 0;
+
             Console.WriteLine("Please enter your username: ");
             string username = Console.ReadLine();
             Console.WriteLine("Please enter your password: ");
             string password = Console.ReadLine();
 
-            //Need JSON FILE to check username and pass
-            /*if (username == ... && password == ...) {
-                Console.WriteLine("Succesfuly logged in");
-            else
+
+            var users = json_customer.getUserlist();
+            foreach(var x in users)
+            {
+                if(username == x.username && Hash.Encrypt(password) == x.password)
                 {
-                    Console.WriteLine("Wrong login/password. Try again");
+                    Console.WriteLine("Log in successful!");
+                    login += 1;
+
                 }
-            */
+            }
+
+            if(login <= 0)
+            {
+                Console.WriteLine("Error");
+            }
+
         }
     }
 }
