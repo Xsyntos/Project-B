@@ -2,49 +2,47 @@
 using System.Collections.Generic;
 using System.Text;
 
+
+
 namespace ProjectRestaurant
 {
     class Menu
     {
-        public static void MainMenu()
+        public option[] options { get; set; }
+        public string prefix { get; set; }
+
+        public void RunMenu()
         {
+            string prompt = @$"
 
-
-
-           
-            Console.WriteLine("[1] Log-In");
-            Console.WriteLine("[2] Sign-Up");
-            Console.WriteLine("[3] Continue as guest");
-            Console.WriteLine("[4] Exit");
-
-            string input = Console.ReadLine();
-
-            if (input == "1")
+                                           
+ _____         _                       _   
+| __  |___ ___| |_ ___ _ _ ___ ___ ___| |_ 
+|    -| -_|_ -|  _| .'| | |  _| .'|   |  _|
+|__|__|___|___|_| |__,|___|_| |__,|_|_|_|  
+                                           
+{prefix}  ";
+            string[] optionText = new string[options.Length];
+            for(int i = 0; i < options.Length; i++)
             {
-                ///Log in
-            }
-            else if (input == "2")
-            {
-
-                 Registration.RegistrationFirstVersion();
-
-            }
-            else if (input == "3")
-            {
-                Guest.LoginAsGuest();
-
-            }
-            else
-            {
-                Console.WriteLine("Thank you for visiting our restaurant application, See You Soon ");
-                Environment.Exit(0);
+                optionText[i] = options[i].printToConsole;
             }
 
-
-               }
-
-           }
+            Game mainMenu = new Game(prompt, optionText);
+            int selectedIndex = mainMenu.Run();
+            
+            options[selectedIndex].func();
         }
+    }
+
+    class option
+    {
+        public string printToConsole { get; set; }
+        public Action func { get; set; }
+    }
+
+
+}
 
      
     

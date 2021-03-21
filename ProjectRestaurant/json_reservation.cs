@@ -116,5 +116,21 @@ namespace ProjectRestaurant
                 Console.WriteLine("-------------------------------");
             }
         }
+
+        public static reservation[] reservationsofdate(DateTime date)
+        {
+            clearOldreservation();
+            var data = getReservationlist();
+            var list = new List<reservation>();
+            foreach(var i in data)
+            {
+                if(i.date == date)
+                {
+                    list.Add(i);
+                }
+            }
+            return list.ToArray();
+        }
+
     }
 }
