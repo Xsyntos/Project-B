@@ -4,16 +4,21 @@ using System.Text;
 
 namespace ProjectRestaurant
 {
+
     class login
+
     {
         public static void Login()
         {
             // login
+
             int login = 0;
+
             Console.WriteLine("Please enter your username: ");
             string username = Console.ReadLine();
             Console.WriteLine("Please enter your password: ");
             string password = Console.ReadLine();
+
 
             var users = json_customer.getUserlist();
             foreach(var x in users)
@@ -30,6 +35,7 @@ namespace ProjectRestaurant
             {
                 Console.WriteLine("Error");
             }
+
         }
     }
 }
