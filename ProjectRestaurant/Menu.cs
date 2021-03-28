@@ -8,19 +8,12 @@ namespace ProjectRestaurant
 {
     class Menu
     {
+        public option[] options { get; set; }
+        public string prefix { get; set; }
 
-        public void start()
+        public void RunMenu()
         {
-           // Title = "Example of the restaurant menu";
-
-
-
-            RunMainMenu();
-
-        }
-        private void RunMainMenu()
-        {
-            string prompt = @"
+            string prompt = @$"
 
                                            
  _____         _                       _   
@@ -28,50 +21,26 @@ namespace ProjectRestaurant
 |    -| -_|_ -|  _| .'| | |  _| .'|   |  _|
 |__|__|___|___|_| |__,|___|_| |__,|_|_|_|  
                                            
-Welcome to our restaurant  ";
-
-            //  string prompt = "Welcome to our restaurant";
-            string[] options = { "Log-In", "Sign-up", "As gast", "Exit" };
-            Game mainMenu = new Game(prompt, options);
-            int selectedIndex = mainMenu.Run();
-
-            switch (selectedIndex)
+{prefix}  ";
+            string[] optionText = new string[options.Length];
+            for(int i = 0; i < options.Length; i++)
             {
-                case 0:
-                    login();
-                    break;
-                case 1:
-                    Signup();
-                    break;
-                case 2:
-                    ContineuAsGuest();
-                    break;
-                case 3:
-                    Exit();
-                    break;
-                default:
-                    break;
+                optionText[i] = options[i].printToConsole;
             }
 
-        }
-        private void Exit()
-        {
-            Console.WriteLine("Press a key to close the application");
-        }
-        private void Signup()
-        {
-            Console.WriteLine("Signin");
-        }
-        private void ContineuAsGuest()
-        {
-            Console.WriteLine("Gast");
-        }
-        private void login()
-        {
-            Console.WriteLine("Login");
-
+            Game mainMenu = new Game(prompt, optionText);
+            int selectedIndex = mainMenu.Run();
+            
+            options[selectedIndex].func();
         }
     }
+
+    class option
+    {
+        public string printToConsole { get; set; }
+        public Action func { get; set; }
+    }
+
 
 }
 

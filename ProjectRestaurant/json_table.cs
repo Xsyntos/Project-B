@@ -85,5 +85,35 @@ namespace ProjectRestaurant
                 Console.WriteLine("-------------------------------");
             }
         }
+        public static table[] getFreeTable(DateTime date)
+        {
+         //   var list = new List<table>();
+            var tables = getTableList();
+            var tablelist = new List<table>();
+            var res = json_reservation.reservationsofdate(date);
+            tablelist.AddRange(tables);
+           foreach (var i in res) {
+                foreach (var y in tables)
+                {
+                    if((y.Id == i.table.Id))
+                    {
+                        tablelist.Remove(y);
+                    }
+                }
+            }
+            return tablelist.ToArray();
+
+        }
+        public static table getTableFromId(int id)
+        {
+            var data = getTableList();
+            foreach(var i in data) {
+                if(i.Id == id)
+                {
+                    return i;
+                }
+            }
+            return new table();
+        }
     }
 }
