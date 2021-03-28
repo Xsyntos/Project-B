@@ -164,6 +164,12 @@ namespace ProjectRestaurant
                 },
                 new option
                 {
+                    printToConsole = "Take Away",
+                    func = Takeaway.Takeawayinput
+                    
+                },
+                new option
+                {
                     printToConsole = "Log-out",
                     func = mainMenu
                 }
