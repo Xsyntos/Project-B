@@ -7,9 +7,9 @@ namespace ProjectRestaurant
     class Checker
     {
         // Check receives a string number and returns a string text
-        public static string Check(string number)
+        public static bool Check(string number)
         {
-            string text = number.Length < 14 ? "Error: too short!" : number.Length > 14 ? "Error: too long!" : "Good enough!";
+            bool text = number.Length < 14 ? false : number.Length > 14 ? false : true;
             return text;
         }
     }
