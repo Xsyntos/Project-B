@@ -61,21 +61,11 @@ namespace ProjectRestaurant
         public static void removeReservation(string id)
         {
             var data = getReservationlist();
-            foreach (var i in data)
-            {
-                if (id == i.Id)
-                {
-                    if ((i.date - DateTime.Now).Days >= 1 || (i.date - DateTime.Now).Days < 0)
-                    {
-                        data.Remove(i);
-                        var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<reservation>>(data);
-                        File.WriteAllText(@"reservation.json", jsonString);
-                    }
-                }
-            }
-
-
+            data.RemoveAll(item => item.Id == id);
+            var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<reservation>>(data);
+            File.WriteAllText(@"reservation.json", jsonString);
         }
+
         private static Random random = new Random();
         public static string resKey(int length = 12)
         {
