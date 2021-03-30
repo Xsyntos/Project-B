@@ -9,18 +9,20 @@ namespace ProjectRestaurant
 
         public static void Takeawayinput()
         {
+            json_takeaway.takeawayInit();
             
             Console.WriteLine("Insert the Food name: ");
             var Foodname = Console.ReadLine();
-            
+
+            var CostumerName = "";
             if(client_variable.user == null)
             {
                 Console.WriteLine("What is your name?: ");
-                var CostumerName = Console.ReadLine();
+                CostumerName = Console.ReadLine();
             }
             else
             {
-                var CostumerName = client_variable.user.username;
+                CostumerName = client_variable.user.username;
                 Console.WriteLine("Current user logged in: "); 
                 Console.WriteLine(CostumerName);
             }
@@ -41,6 +43,7 @@ namespace ProjectRestaurant
                 Console.WriteLine("Credit card number is Invalid! Please try again.");
                 CardNumber = Console.ReadLine();
             }
+            json_takeaway.addtakeaway(Foodname, CostumerName, PickUpTime, CardNumber);
             menuReg.mainCustomermenu();
         }
     }
