@@ -19,8 +19,9 @@ namespace ProjectRestaurant
  : shit shit shit");
                     Console.WriteLine(@"3) Pasta shit
  : shit poop poop");
-
-                    ConsoleKeyInfo CostumerSelectaFood;
+                Console.WriteLine(@"4) Pasta damn
+ : shit poop poop");
+                ConsoleKeyInfo CostumerSelectaFood;
                     CostumerSelectaFood = Console.ReadKey(true);
 
 
@@ -38,9 +39,15 @@ namespace ProjectRestaurant
                         Console.WriteLine(Order + "Pasta shit");
                         Console.ReadKey();
                         break;
+                    case '4':
+                        Console.WriteLine(Order + "Pasta damn");
+                        Console.ReadKey();
+                        break;
+
+
                 }
-               
-                }
+
+            }
             
         }
 
