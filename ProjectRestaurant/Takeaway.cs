@@ -13,9 +13,19 @@ namespace ProjectRestaurant
             Console.WriteLine("Insert the Food name: ");
             var Foodname = Console.ReadLine();
             
+            if(client_variable.user == null)
+            {
+                Console.WriteLine("What is your name?: ");
+                var CostumerName = Console.ReadLine();
+            }
+            else
+            {
+                var CostumerName = client_variable.user.username;
+                Console.WriteLine("Current user logged in: "); 
+                Console.WriteLine(CostumerName);
+            }
             ///Costumer Name
-            Console.WriteLine("What is your name?: ");
-            var CostumerNmae = Console.ReadLine();
+            
 
             /// Time to pick up
             Console.WriteLine("when do you want to pick up your food? : ");
