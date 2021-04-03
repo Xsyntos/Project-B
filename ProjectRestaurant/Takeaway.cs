@@ -10,7 +10,8 @@ namespace ProjectRestaurant
         public static void Takeawayinput()
         {
 
-            foodmenu.Foods();
+            Foodmenu2.Foods1();
+            ///foodmenu.Foods(); <--- First Foodmenu
             json_takeaway.takeawayInit();
             
             Console.WriteLine("Insert the Food name: ");

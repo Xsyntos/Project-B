@@ -54,7 +54,7 @@ namespace ProjectRestaurant
                 }
 
                /// Console.WriteLine("Thanks you for Order food.");
-                Console.WriteLine("Your Bill Amount = {0} Please press Enter to Pay", TotalFoodCost);
+                Console.WriteLine("Your Bill Amount = {0} Please press Enter to pay", TotalFoodCost);
 
                 Console.ReadLine();
             }
