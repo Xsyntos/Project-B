@@ -9,6 +9,8 @@ namespace ProjectRestaurant
 
         public static void Takeawayinput()
         {
+
+            foodmenu.Foods();
             json_takeaway.takeawayInit();
             
             Console.WriteLine("Insert the Food name: ");
@@ -16,6 +18,7 @@ namespace ProjectRestaurant
 
             var CostumerName = "";
             if(client_variable.user == null)
+
             {
                 Console.WriteLine("What is your name?: ");
                 CostumerName = Console.ReadLine();
@@ -26,7 +29,6 @@ namespace ProjectRestaurant
                 Console.WriteLine("Current user logged in: "); 
                 Console.WriteLine(CostumerName);
             }
-            ///Costumer Name
             
 
             /// Time to pick up
