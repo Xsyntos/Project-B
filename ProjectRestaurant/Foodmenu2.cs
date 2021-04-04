@@ -58,7 +58,7 @@ namespace ProjectRestaurant
             System.Random random = new System.Random();
             Console.WriteLine("Your Order Number is: ", random);
             System.Console.WriteLine(random.Next(10000));
-            Console.WriteLine("Your bill Amount is {0} euro, Please press Enter to complete your order/s", TotalFoodCost, "And your order number is", random );
+            Console.WriteLine("Your bill Amount is {0} euro, Please press Enter to complete your order/s", TotalFoodCost, "And your order number is:", random );
             Console.ReadLine();
         }
        
