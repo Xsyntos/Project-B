@@ -9,7 +9,16 @@ namespace ProjectRestaurant
         public static void RegistrationFirstVersion()
 
         {
+            Console.Clear();
+            Console.WriteLine(@$"
 
+                                           
+ _____         _                       _   
+| __  |___ ___| |_ ___ _ _ ___ ___ ___| |_ 
+|    -| -_|_ -|  _| .'| | |  _| .'|   |  _|
+|__|__|___|___|_| |__,|___|_| |__,|_|_|_|  
+                                           
+Registration  ");
             /// Input Username
             Console.WriteLine("Insert Username: ");
             var username = Console.ReadLine();
@@ -30,6 +39,7 @@ namespace ProjectRestaurant
                 {
                     json_customer.newUser(username, Hash.Encrypt(Password), "123");
                     Console.WriteLine("Successfully registered");
+                    menuReg.mainMenu();
                 }
                 else
                 {

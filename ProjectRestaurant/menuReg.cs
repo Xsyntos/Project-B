@@ -45,6 +45,11 @@ namespace ProjectRestaurant
                         func = reservationMenu1(y - 1)
                     });
                 }
+                list.Add(new option
+                {
+                    printToConsole = "Return",
+                    func = mainCustomermenu
+                });
 
             Menu menu = new Menu
             {
@@ -83,6 +88,7 @@ namespace ProjectRestaurant
                         );
                     }
 
+
                 }
                 option.Add(new option
                 {
@@ -105,6 +111,7 @@ namespace ProjectRestaurant
             void MakeReservationMenu()
             {
                 json_reservation.makeReservation(date, client_variable.user, table);
+                mainCustomermenu();
             }
             return MakeReservationMenu;
         }
@@ -114,11 +121,13 @@ namespace ProjectRestaurant
             var optie = new option[] {
                 new option
                 {
-                    printToConsole = "Log-in"
+                    printToConsole = "Log-in",
+                    func = login.Login
                 },
                 new option
                 {
-                    printToConsole =  "Registrate" 
+                    printToConsole =  "Registrate" ,
+                    func = Registration.RegistrationFirstVersion
                 },
                 new option
                 {
@@ -136,6 +145,171 @@ namespace ProjectRestaurant
             };
             menu.RunMenu();
         }
+        public static void mainCustomermenu()
+        {
+            var optie = new option[]
+            {
+                new option
+                {
+                    printToConsole = "Make a Reservation",
+                    func = reservationMenu1(0)
+                },
+                new option
+                {
+                    printToConsole = "Check reservations",
+                    func = userReservationMenu
+                },
+                new option
+                {
+                    printToConsole = "Change account settings"
+                },
+                new option
+                {
+                    printToConsole = "Take Away",
+                    func = Takeaway.Takeawayinput
+                    
+                },
+                new option
+                {
+                    printToConsole = "Log-out",
+                    func = mainMenu
+                }
+
+            };
+            var menu = new Menu
+            {
+                prefix = "Welcome to our Restaurant",
+                options = optie
+            };
+            menu.RunMenu();
+        }
+        public static void mainAdminmenu()
+        {
+            var x = new option[]
+            {
+               new option
+               {
+                   printToConsole = "Check all reservations"
+               },
+               new option
+               {
+                   printToConsole = "Tables"
+               },
+               new option
+               {
+                   printToConsole = "Log-out",
+                   func = mainMenu
+               }
+
+        
+            };
+            var menu = new Menu
+            {
+                prefix = "Welcome Boss",
+                options = x
+            };
+            menu.RunMenu();
+
+        }
+
+
+        public static void userReservationMenu() {
+            var options = new List<option>();
+            foreach (var i in json_reservation.getUserReservations()) {
+                options.Add(
+                    new option
+                    {
+                        printToConsole = $"{i.Id} - {i.date}",
+                        func = reservationMenu(i)
+                    }
+                    );
+
+            }
+            options.Add(new option { 
+                printToConsole = "Return",
+                func = mainCustomermenu
+            });
+
+            var menu = new Menu
+            {
+                prefix = "Reservations",
+                options = options.ToArray()
+            };
+            menu.RunMenu();
+        }
+
+        public static Action reservationMenu(reservation res) { 
+            void rest()
+            {
+                void cancel()
+                {
+                    Console.Clear();
+                    Console.WriteLine(@$"
+
+                                           
+ _____         _                       _   
+| __  |___ ___| |_ ___ _ _ ___ ___ ___| |_ 
+|    -| -_|_ -|  _| .'| | |  _| .'|   |  _|
+|__|__|___|___|_| |__,|___|_| |__,|_|_|_|  
+                                           
+Login  ");
+                    Console.WriteLine("WARNING:  If you want to cancel the reservation, you must do so 24 hours in advance, otherwise we will charge you for 10 euros!");
+                    Console.WriteLine("To Cancel your Reservation type YES");
+                    var x = Console.ReadLine();
+                    if (x.ToUpper() == "YES")
+                    {
+                        json_reservation.removeReservation(res.Id);
+                        Console.WriteLine("Your Reservation is succesfully canceled!\nPress a key to Continue");
+                        if((res.date - DateTime.Now).Days < 0){
+                            Console.WriteLine("We Charged you 10 euros!");
+                        }
+                        Console.ReadKey();
+                        menuReg.mainCustomermenu();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Your Reservation is not canceled\nPress a key to Continue");
+                        Console.ReadKey();
+                        menuReg.mainCustomermenu();
+                    }
+                }
+                var options = new option[]
+                {
+                    new option
+                    {
+                        printToConsole = "Cancel Reservation",
+                        func = cancel
+                    },
+                    new option
+                    {
+                        printToConsole = "Return",
+                        func = userReservationMenu
+                    }
+                };
+
+                var menu = new Menu
+                {
+                    options = options,
+                    prefix = $"Id: {res.Id}\nTable: {res.table.stringy()}\nDate: {res.date}"
+                };
+
+                menu.RunMenu();
+            }
+            return rest;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     }
