@@ -10,13 +10,18 @@ namespace ProjectRestaurant
         public static void Takeawayinput()
         {
 
-            Foodmenu2.Foods1();
-            ///foodmenu.Foods(); <--- First Foodmenu
+            
+            
             json_takeaway.takeawayInit();
             
-            Console.WriteLine("Insert the Food name: ");
-            var Foodname = Console.ReadLine();
-
+            Console.WriteLine("Order your food for take away: ");
+            ///foodmenu.Foods(); <--- First Foodmenu
+             Foodmenu2.Foods1();
+          
+            
+            
+            
+            
             var CostumerName = "";
             if(client_variable.user == null)
 
@@ -46,7 +51,7 @@ namespace ProjectRestaurant
                 Console.WriteLine("Credit card number is Invalid! Please try again.");
                 CardNumber = Console.ReadLine();
             }
-            json_takeaway.addtakeaway(Foodname, CostumerName, PickUpTime, CardNumber);
+           // json_takeaway.addtakeaway(Foodmenu2, CostumerName, PickUpTime, CardNumber);
             menuReg.mainCustomermenu();
         }
     }

@@ -53,11 +53,16 @@ namespace ProjectRestaurant
 
                 }
 
-               /// Console.WriteLine("Thanks you for Order food.");
-                Console.WriteLine("Your Bill Amount = {0} Please press Enter to pay", TotalFoodCost);
 
-                Console.ReadLine();
-            }
+            /// Console.WriteLine("Thanks you for Order food.");
+            System.Random random = new System.Random();
+            Console.WriteLine("Your Order Number is: ", random);
+            System.Console.WriteLine(random.Next(10000));
+            Console.WriteLine("Your bill Amount is {0} euro, Please press Enter to complete your order/s", TotalFoodCost, "And your order number is", random );
+            Console.ReadLine();
         }
+       
+
+    }
     }
 
