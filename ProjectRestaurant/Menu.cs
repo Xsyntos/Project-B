@@ -30,8 +30,15 @@ namespace ProjectRestaurant
 
             Game mainMenu = new Game(prompt, optionText);
             int selectedIndex = mainMenu.Run();
-            
-            options[selectedIndex].func();
+
+            if (options[selectedIndex].func != null)
+            {
+                options[selectedIndex].func();
+            }
+            else
+            {
+                this.RunMenu();
+            }
         }
     }
 

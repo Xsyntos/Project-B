@@ -35,11 +35,8 @@ namespace ProjectRestaurant
         public static void clearOldreservation()
         {
             var data = getReservationlist();
-            foreach (var i in data)
-            {
-                if ((i.date - DateTime.Now).Days < 0)
-                    removeReservation(i.Id);
-            }
+            data.RemoveAll(i => i.date < DateTime.Now);
+
             var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<reservation>>(data);
             File.WriteAllText(@"reservation.json", jsonString);
         }
@@ -121,6 +118,12 @@ namespace ProjectRestaurant
             }
             return list.ToArray();
         }
-
+        public static List<reservation> getUserReservations()
+        {
+            clearOldreservation();
+            var data = getReservationlist();
+            data.RemoveAll(i => (i.user.Id != client_variable.user.Id) || (i.user.username != client_variable.user.username));
+            return data;
+        }
     }
 }
