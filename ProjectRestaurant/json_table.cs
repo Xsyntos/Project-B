@@ -14,6 +14,16 @@ namespace ProjectRestaurant
         public int Id { get; set; }
         public int capacity { get; set; }
         public bool vip { get; set; }
+
+        public string stringy()
+        {
+            if (this.vip)
+            {
+                return $"table of {this.capacity} VIP";
+            }
+            return $"table of {this.capacity}";
+        }
+
     }
 
     class json_table
