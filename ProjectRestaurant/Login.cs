@@ -11,7 +11,16 @@ namespace ProjectRestaurant
         public static void Login()
         {
             // login
+            Console.Clear();
+            Console.WriteLine(@$"
 
+                                           
+ _____         _                       _   
+| __  |___ ___| |_ ___ _ _ ___ ___ ___| |_ 
+|    -| -_|_ -|  _| .'| | |  _| .'|   |  _|
+|__|__|___|___|_| |__,|___|_| |__,|_|_|_|  
+                                           
+Login  ");
             int login = 0;
 
             Console.WriteLine("Please enter your username: ");
@@ -43,6 +52,8 @@ namespace ProjectRestaurant
             if(login <= 0)
             {
                 Console.WriteLine("Error");
+                Console.ReadKey();
+                menuReg.mainMenu();
             }
 
         }
