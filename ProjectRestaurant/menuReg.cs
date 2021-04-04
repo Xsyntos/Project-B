@@ -111,6 +111,20 @@ namespace ProjectRestaurant
             void MakeReservationMenu()
             {
                 json_reservation.makeReservation(date, client_variable.user, table);
+                var arr = json_reservation.reservationsofdate(date);
+                reservation res = null;
+
+                foreach (var x in arr)
+                {
+                    if (x.table.Id == table.Id)
+                    {
+                        res = x;
+                    }
+                }
+
+                Console.WriteLine("Reservation Complete\n" + "Reservation Code is: " + res.Id);
+                Console.WriteLine("Press Enter to continue...");
+                Console.ReadLine();
                 mainCustomermenu();
             }
             return MakeReservationMenu;
