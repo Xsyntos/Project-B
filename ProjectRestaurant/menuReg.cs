@@ -203,7 +203,7 @@ namespace ProjectRestaurant
             {
                new option
                {
-                   printToConsole = "Check all reservations"
+                   printToConsole = "Check all reservations",
                },
                new option
                {
@@ -224,6 +224,36 @@ namespace ProjectRestaurant
             };
             menu.RunMenu();
 
+        }
+        public static void mainCashiermenu()
+        {
+            
+            var x = new option[]
+            {
+                new option
+                {
+                    printToConsole = "Check all reservations",
+
+                },
+                new option
+                {
+                    printToConsole = "Change reservation"
+                },
+                new option
+                {
+                    printToConsole = "Delete reservation"
+                },
+                new option
+                {
+                    printToConsole = "Log- out",
+                    func = mainMenu
+                }
+            };
+            var menu = new Menu
+            {
+                options = x
+            };
+            menu.RunMenu();
         }
 
 

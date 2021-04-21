@@ -38,9 +38,17 @@ namespace ProjectRestaurant
                 {
                     Id = 2,
                     username = "Chef",
-                    password = "chef",
+                    password = Hash.Encrypt("chef"),
                     creditcard = "-Chef-",
                     role = "chef"
+                });
+                data.Add(new user()
+                {
+                    Id = 3,
+                    username = "Cashier",
+                    password = Hash.Encrypt("cashier"),
+                    creditcard = "-Cashier-",
+                    role = "cashier"
                 });
                 string jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<user>>(data);
                 File.WriteAllText(@"users.json", jsonString);
