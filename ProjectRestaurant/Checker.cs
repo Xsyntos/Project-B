@@ -9,7 +9,7 @@ namespace ProjectRestaurant
         // Check receives a string number and returns a string text
         public static bool Check(string number)
         {
-            bool text = number.Length < 14 ? false : number.Length > 14 ? false : true;
+            bool text = number.Length < 16 ? false : number.Length > 16 ? false : true;
             return text;
         }
     }

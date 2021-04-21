@@ -129,5 +129,14 @@ namespace ProjectRestaurant
             return new user();
         }
 
+        public static void updateUser()
+        {
+            var data = getUserlist();
+            data.RemoveAll(u => u.Id == client_variable.user.Id);
+            data.Add(client_variable.user);
+            var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<user>>(data);
+            File.WriteAllText(@"users.json", jsonString);
+        }
+
     }
 }

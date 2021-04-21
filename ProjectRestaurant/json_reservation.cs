@@ -125,5 +125,36 @@ namespace ProjectRestaurant
             data.RemoveAll(i => (i.user.Id != client_variable.user.Id) || (i.user.username != client_variable.user.username));
             return data;
         }
+
+        public static reservation GetReservation(string id)
+        {
+            clearOldreservation();
+            var data = getReservationlist();
+            foreach(var i in data)
+            {
+                if(i.Id == id)
+                {
+                    return i;
+                }
+            }
+            return new reservation
+            {
+
+            };
+        }
+
+        public static bool doesReservationexist(string id)
+        {
+            clearOldreservation();
+            var data = getReservationlist();
+            foreach (var i in data)
+            {
+                if (i.Id == id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
