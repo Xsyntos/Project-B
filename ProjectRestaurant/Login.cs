@@ -47,6 +47,10 @@ Login  ");
                         {
                             menuReg.mainCustomermenu();
                         }
+                        if (x.role == "cashier")
+                        {
+                            menuReg.mainCashiermenu();
+                        }
                         if (x.role == "admin")
                         {
                             menuReg.mainAdminmenu();
