@@ -309,16 +309,8 @@ namespace ProjectRestaurant
             {
                 new option
                 {
-                    printToConsole = "Check all reservations",
-
-                },
-                new option
-                {
-                    printToConsole = "Change reservation"
-                },
-                new option
-                {
-                    printToConsole = "Delete reservation"
+                    printToConsole = "Reservation Menu",
+                    func = cashierReservationMenu
                 },
                 new option
                 {
@@ -328,7 +320,8 @@ namespace ProjectRestaurant
             };
             var menu = new Menu
             {
-                options = x
+                options = x,
+                prefix = "Welcome Cashier"
             };
             menu.RunMenu();
         }
@@ -352,6 +345,34 @@ namespace ProjectRestaurant
             {
                 printToConsole = "Return",
                 func = mainCustomermenu
+            });
+
+            var menu = new Menu
+            {
+                prefix = "Reservations",
+                options = options.ToArray()
+            };
+            menu.RunMenu();
+        }
+
+        public static void cashierReservationMenu()
+        {
+            var options = new List<option>();
+            foreach (var i in json_reservation.getReservationlist())
+            {
+                options.Add(
+                    new option
+                    {
+                        printToConsole = $"{i.Id} - {i.date}",
+                        func = reservationMenu(i)
+                    }
+                    );
+
+            }
+            options.Add(new option
+            {
+                printToConsole = "Return",
+                func = mainCashiermenu
             });
 
             var menu = new Menu
@@ -391,6 +412,7 @@ Cancel Reservation  ");
                         }
                         Console.ReadKey();
                         if (client_variable.user.role == "guest") { GuestMenu(); }
+                        else if (client_variable.user.role == "cashier") { mainCashiermenu(); }
                         else { mainCustomermenu(); }
                     }
                     else
@@ -398,6 +420,7 @@ Cancel Reservation  ");
                         Console.WriteLine("Your Reservation is not canceled\nPress a key to Continue");
                         Console.ReadKey();
                         if (client_variable.user.role == "guest") { GuestMenu(); }
+                        else if (client_variable.user.role == "cashier") { mainCashiermenu(); }
                         else { menuReg.mainCustomermenu(); }
 
                     }
