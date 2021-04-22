@@ -39,7 +39,7 @@ Registration  ");
                 {
                     json_customer.newUser(username, Hash.Encrypt(Password), "123");
                     Console.WriteLine("Successfully registered");
-                    menuReg.mainMenu();
+                    new MenuHandler().mainMenu();
                 }
                 else
                 {
