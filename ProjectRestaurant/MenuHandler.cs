@@ -360,7 +360,12 @@ Change Creditcard  ");
                 },
                 new option
                 {
-                    printToConsole = "Log- out",
+                    printToConsole = "Change Account Settings",
+                    func = accountSettings
+                },
+                new option
+                {
+                    printToConsole = "Log-out",
                     func = mainMenu
                 }
                 };
