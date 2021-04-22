@@ -11,9 +11,7 @@ namespace ProjectRestaurant
         json_reservation.reservationInit();
         json_customer.customerinit();
         json_table.tableInit();
-
-        json_reservation.clearOldreservation();
-        menuReg.mainMenu();
+        new MenuHandler().mainMenu();
 
         }
 

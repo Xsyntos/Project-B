@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace ProjectRestaurant
-{
+{ 
 
     class login
 
@@ -43,24 +43,15 @@ Login  ");
                         Console.WriteLine("Log in successful!");
                         login += 1;
                         client_variable.user = x;
-                        if (x.role == "customer")
-                        {
-                            menuReg.mainCustomermenu();
-                        }
-                        if (x.role == "cashier")
-                        {
-                            menuReg.mainCashiermenu();
-                        }
-                        if (x.role == "admin")
-                        {
-                            menuReg.mainAdminmenu();
-                        }
+                        new MenuHandler().userMain();
 
                     }
                 }
                 Console.WriteLine("Error");
                 Console.ReadKey();
-                menuReg.mainMenu();
+                new MenuHandler().mainMenu();
+
+
             }
         }
     }

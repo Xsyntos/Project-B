@@ -51,8 +51,8 @@ namespace ProjectRestaurant
                 Console.WriteLine("Credit card number is Invalid! Please try again.");
                 CardNumber = Console.ReadLine();
             }
-           // json_takeaway.addtakeaway(Foodmenu2, CostumerName, PickUpTime, CardNumber);
-            menuReg.mainCustomermenu();
+            // json_takeaway.addtakeaway(Foodmenu2, CostumerName, PickUpTime, CardNumber);
+            new MenuHandler().userMain();
         }
     }
 }
