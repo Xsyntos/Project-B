@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Text.Json;
 
 namespace ProjectRestaurant
 { 
@@ -28,8 +30,8 @@ Login  ");
             string password;
 
             var users = json_customer.getUserlist();
-            
-            
+
+
             while (login == 0)
             {
                 Console.WriteLine("Please enter your username: ");

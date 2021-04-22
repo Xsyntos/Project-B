@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 
@@ -24,7 +25,10 @@ namespace ProjectRestaurant
                 };
                 void loginGuest()
                 {
-                    client_variable.user = new user("guest");
+                    client_variable.user = new user()
+                    {
+                        role = "guest"
+                    };
 
                     new MenuHandler().userMain();
                 }
@@ -155,7 +159,7 @@ Change Username  ");
                         if (newusername == newusername2)
                         {
                             client_variable.user.username = newusername;
-                            json_customer.updateUser();
+                            json_customer.updateUserFromClient();
                             accountSettings();
                         }
                         else
@@ -195,7 +199,7 @@ Change password  ");
                         if (newusername == newusername2)
                         {
                             client_variable.user.password = Hash.Encrypt(newusername);
-                            json_customer.updateUser();
+                            json_customer.updateUserFromClient();
                             accountSettings();
                         }
                         else
@@ -248,7 +252,7 @@ Change Creditcard  ");
                         if (newusername == newusername2)
                         {
                             client_variable.user.creditcard = newusername;
-                            json_customer.updateUser();
+                            json_customer.updateUserFromClient();
                             accountSettings();
                         }
                         else
@@ -290,21 +294,12 @@ Change Creditcard  ");
                 }
                 };
 
-                /*
-                            if (client_variable.user.role == "admin")
-                            {
-                                options[3].func = new AdminsMenus().Main;
-                            } */
-
                 Menu men = new Menu()
                 {
                     options = options,
                     prefix = "Change Account Settings"
                 };
                 men.RunMenu();
-
-
-
             }
 
 
@@ -413,12 +408,140 @@ Change Creditcard  ");
         protected class CustomerMenus : GeneralMenus
         {
             //menu
+            protected void Catagory()
+            {
+                bool isInCat(string s)
+                {
+                    return client_variable.dish_catagory.ToArray().Intersect(new string[] {s }).Any();
+            }
+                
+                var opties = new option[]
+                {
+                    new option
+                    {
+                        printToConsole = $"Children Food <{isInCat("childrenfood")}>",
+                        func = () =>
+                        {
+                            if (isInCat("childrenfood"))
+                            {
+                                client_variable.dish_catagory.Remove("childrenfood");
+                            }
+                            else
+                            {
+                                client_variable.dish_catagory.Add("childrenfood");
+                            }
+                            Catagory();
+                        }
+
+                    },
+                    new option
+                    {
+                        printToConsole = $"Vegan <{isInCat("vegan")}>",
+                        func = () =>
+                        {
+                            if (isInCat("vegan"))
+                            {
+                                client_variable.dish_catagory.Remove("vegan");
+                            }
+                            else
+                            {
+                                client_variable.dish_catagory.Add("vegan");
+                            }
+                            Catagory();
+                        }
+
+                    },
+                    new option
+                    {
+                        printToConsole = $"Meat <{isInCat("meat")}>",
+                        func = () =>
+                        {
+                            if (isInCat("meat"))
+                            {
+                                client_variable.dish_catagory.Remove("meat");
+                            }
+                            else
+                            {
+                                client_variable.dish_catagory.Add("meat");
+                            }
+                            Catagory();
+                        }
+
+                    },
+                    new option
+                    {
+                        printToConsole = $"Lunch <{isInCat("lunch")}>",
+                        func = () =>
+                        {
+                            if (isInCat("lunch"))
+                            {
+                                client_variable.dish_catagory.Remove("lunch");
+                            }
+                            else
+                            {
+                                client_variable.dish_catagory.Add("lunch");
+                            }
+                            Catagory();
+                        }
+
+                    },
+                    new option
+                    {
+                        printToConsole = $"Dinner <{isInCat("dinner")}>",
+                        func = () =>
+                        {
+                            if (isInCat("dinner"))
+                            {
+                                client_variable.dish_catagory.Remove("dinner");
+                            }
+                            else
+                            {
+                                client_variable.dish_catagory.Add("dinner");
+                            }
+                            Catagory();
+                        }
+
+                    },
+                    new option
+                    {
+                        printToConsole = $"Turkish Food <{isInCat("turk")}>",
+                        func = () =>
+                        {
+                            if (isInCat("turk"))
+                            {
+                                client_variable.dish_catagory.Remove("turk");
+                            }
+                            else
+                            {
+                                client_variable.dish_catagory.Add("turk");
+                            }
+                            Catagory();
+                        }
+
+                    },
+                    new option
+                    {
+                        printToConsole = $"Return",
+                        func = Menu
+                        
+
+                    }
+                };
+                Menu men = new Menu()
+                {
+                    options = opties,
+                    prefix = "Filters"
+                };
+                men.RunMenu();
+            }
             protected void Menu()
             {
                 var list = new List<option>();
+
                 list.Add(new option
                 {
-                    printToConsole = "Filters"
+                    printToConsole = "Filters",
+                    func = Catagory
                 });
                 Action dishitem(Dish d) {
                     void func()
@@ -434,7 +557,7 @@ Change Creditcard  ");
                         string temp = "[";
                         foreach(var x in d.Categories)
                         {
-                            temp += $", {x}";
+                            temp += $"{x} ";
                         }
                         temp += "]";
                         Menu men = new Menu
@@ -446,14 +569,32 @@ Change Creditcard  ");
                     }
                     return func;
                 }
+                
 
-                foreach(var dish in json_dish.getDishList())
+                foreach (var dish in json_dish.getDishList())
                 {
-                    list.Add(new option
+                    if (dish.Spotlighted)
                     {
-                        printToConsole = dish.Title,
-                        func = dishitem(dish)
-                    });
+                        if (dish.Categories.ToArray().Intersect(client_variable.dish_catagory.ToArray()).Any() || client_variable.dish_catagory.Count == 0)
+                        list.Add(new option
+                        {
+                            printToConsole = "-=- " + dish.Title + " -=-",
+                            func = dishitem(dish)
+                        });
+                    }
+                }
+                foreach (var dish in json_dish.getDishList())
+                {
+
+                    if (!dish.Spotlighted)
+                    {
+                        if (dish.Categories.ToArray().Intersect(client_variable.dish_catagory.ToArray()).Any() || client_variable.dish_catagory.Count == 0)
+                            list.Add(new option
+                            {
+                                printToConsole = dish.Title,
+                                func = dishitem(dish)
+                            });
+                    }
                 }
                 list.Add(new option
                 {
@@ -469,6 +610,7 @@ Change Creditcard  ");
 
 
             }
+            
             //General
             public void Main()
             {
@@ -565,7 +707,6 @@ Change Creditcard  ");
                 }
                 return resv;
             }
-
             protected Action reservationMenuDay(DateTime i)
             {
                 var date = i;
@@ -612,7 +753,6 @@ Change Creditcard  ");
                 }
                 return reservationMenu2;
             }
-
             protected Action makeReservationMenu(DateTime date, table table)
             {
                 void MakeReservationMenu()
@@ -644,7 +784,7 @@ Change Creditcard  ");
                             if (Checker.Check(credit))
                             {
                                 client_variable.user.creditcard = credit;
-                                json_customer.updateUser();
+                                json_customer.updateUserFromClient();
                                 owncredit = client_variable.user.creditcard;
                             }
                             else
@@ -725,18 +865,15 @@ Change Creditcard  ");
                 };
                 menu.RunMenu();
             }
-
-
-
-
-
         }
         protected class GuestMenus : CustomerMenus
         {
-
             public new void Main()
             {
-                client_variable.user = new user("guest");
+                client_variable.user = new user()
+                {
+                    role = "guest"
+                };
                 var options = new List<option>();
                 options.Add(
                 new option
@@ -771,7 +908,6 @@ Change Creditcard  ");
                 };
                 men.RunMenu();
             }
-
             private void guestReservation()
             {
                 Console.Clear();

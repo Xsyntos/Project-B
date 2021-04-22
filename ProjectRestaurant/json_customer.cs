@@ -10,12 +10,15 @@ namespace ProjectRestaurant
     [System.Serializable]
     public class user
     {
+        
 
         public int Id { get; set; }
         public string username { get; set; }
         public string password { get; set; }
         public string creditcard { get; set; }
         public string role { get; set; }
+        
+
     }
 
     class json_customer
@@ -104,18 +107,7 @@ namespace ProjectRestaurant
             return data;
         }
 
-        public static void displayUsers()
-        {
-            var data = getUserlist();
-            foreach(var x in data)
-            {
-                Console.WriteLine($"Username: {x.username}") ;
-                Console.WriteLine($"ID: {x.Id}");
-                Console.WriteLine("-------------------------------");
-            }
-        }
-
-        public static user getUser(int id)
+        protected static user getUser(int id)
         {
             var data = getUserlist();
             for(int i = 0; i < data.Count; i++)
@@ -129,7 +121,7 @@ namespace ProjectRestaurant
             return new user();
         }
 
-        public static void updateUser()
+        public static void updateUserFromClient()
         {
             var data = getUserlist();
             data.RemoveAll(u => u.Id == client_variable.user.Id);
