@@ -10,6 +10,7 @@ namespace ProjectRestaurant
         {
         json_reservation.reservationInit();
         json_customer.customerinit();
+        json_dish.dishInit();
         json_table.tableInit();
         new MenuHandler().mainMenu();
 

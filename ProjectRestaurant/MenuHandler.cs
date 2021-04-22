@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Text.Json;
 
 namespace ProjectRestaurant
 {
@@ -22,10 +24,8 @@ namespace ProjectRestaurant
                 };
                 void loginGuest()
                 {
-                    client_variable.user = new user()
-                    {
-                        role = "guest"
-                    };
+                    client_variable.user = new user("guest");
+
                     new MenuHandler().userMain();
                 }
 
@@ -380,7 +380,9 @@ Change Creditcard  ");
             private void cashierReservationMenu()
             {
                 var options = new List<option>();
-                foreach (var i in json_reservation.getReservationlist())
+                string jsonString = File.ReadAllText(@"reservation.json");
+                var data = JsonSerializer.Deserialize<System.Collections.Generic.List<reservation>>(jsonString);
+                foreach (var i in data)
                 {
                     options.Add(
                         new option
@@ -410,12 +412,73 @@ Change Creditcard  ");
         }
         protected class CustomerMenus : GeneralMenus
         {
+            //menu
+            protected void Menu()
+            {
+                var list = new List<option>();
+                list.Add(new option
+                {
+                    printToConsole = "Filters"
+                });
+                Action dishitem(Dish d) {
+                    void func()
+                    {
+                        var options = new option[]
+                        {
+                            new option
+                            {
+                                printToConsole = "Return",
+                                func = Menu
+                            }
+                        };
+                        string temp = "[";
+                        foreach(var x in d.Categories)
+                        {
+                            temp += $", {x}";
+                        }
+                        temp += "]";
+                        Menu men = new Menu
+                        {
+                            options = options,
+                            prefix = $"Name: {d.Title}\n{d.Description}\nPrice: {d.Price} euro\nCatagories: {temp}"
+                        };
+                        men.RunMenu();
+                    }
+                    return func;
+                }
 
+                foreach(var dish in json_dish.getDishList())
+                {
+                    list.Add(new option
+                    {
+                        printToConsole = dish.Title,
+                        func = dishitem(dish)
+                    });
+                }
+                list.Add(new option
+                {
+                    printToConsole = "Return",
+                    func = new MenuHandler().userMain
+                });
+                Menu men = new Menu()
+                {
+                    options = list.ToArray(),
+                    prefix = "Menu"
+                };
+                men.RunMenu();
+
+
+            }
             //General
             public void Main()
             {
                 var optie = new option[]
                 {
+                new option
+                {
+                    printToConsole = "Menu",
+                    func = Menu
+                },
                 new option
                 {
                     printToConsole = "Make a Reservation",
@@ -673,12 +736,14 @@ Change Creditcard  ");
 
             public new void Main()
             {
-                client_variable.user = new user()
-                {
-                    role = "guest",
-                };
+                client_variable.user = new user("guest");
                 var options = new List<option>();
-
+                options.Add(
+                new option
+                {
+                    printToConsole = "Menu",
+                    func = Menu
+                });
                 options.Add(new option
                 {
                     printToConsole = "Make Reservation",

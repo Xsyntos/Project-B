@@ -82,7 +82,7 @@ namespace ProjectRestaurant
             }
             return x;
         }
-        public static List<reservation> getReservationlist()
+        private static List<reservation> getReservationlist()
         {
             string jsonString = File.ReadAllText(@"reservation.json");
             var data = JsonSerializer.Deserialize<System.Collections.Generic.List<reservation>>(jsonString);
