@@ -11,6 +11,7 @@ namespace ProjectRestaurant
     {
         protected GeneralMenus general;
         protected AdminMenus admin;
+        protected ChefMenus chef;
         protected CashierMenus cashier;
         protected CustomerMenus customer;
         protected GuestMenus guest;
@@ -305,7 +306,7 @@ Change Creditcard  ");
 
 
         }
-        protected class AdminMenus : GeneralMenus
+        protected class AdminMenus : ChefMenus
         {
             public void Main()
             {
@@ -341,6 +342,61 @@ Change Creditcard  ");
 
             }
         }
+        protected class ChefMenus : GeneralMenus
+        {
+            public void Main()
+            {
+                var x = new option[]
+                {
+                   new option
+                   {
+                       printToConsole = "Add a Dish",
+                   },
+                   new option
+                   {
+                       printToConsole = "Update a Dish",
+                       func = getAllDishes
+
+                   },
+                   new option
+                   {
+                       printToConsole = "Delete a Dish",
+                   },
+                   new option
+                   {
+                       printToConsole = "Log-out",
+                       func = mainMenu
+                   }
+                };
+                var menu = new Menu
+                {
+                    prefix = "Welcome Chef",
+                    options = x
+                };
+                menu.RunMenu();
+            }
+
+            private void getAllDishes()
+            {
+                var x = new option[json_dish.getDishList().Count];
+                for (int i = 0; i < x.Length; i++)
+                {
+                    x[i] = new option
+                    {
+                        printToConsole = $"{json_dish.getDishList()[i].Title}",
+                        func = json_dish.update(json_dish.getDishList()[i])
+                    };
+                }
+                var menu = new Menu
+                {
+                    prefix = "Welcome Chef",
+                    options = x
+                };
+                menu.RunMenu();
+
+            }
+        }
+
         protected class CashierMenus : GeneralMenus
         {
             public void Main()
@@ -956,6 +1012,7 @@ Search Reservation  ");
             this.cashier = new CashierMenus();
             this.customer = new CustomerMenus();
             this.guest = new GuestMenus();
+            this.chef = new ChefMenus();
         }
         public void mainMenu()
         {
@@ -978,6 +1035,10 @@ Search Reservation  ");
             else if (client_variable.user.role == "admin")
             {
                 this.admin.Main();
+            }
+            else if (client_variable.user.role == "chef")
+            {
+                this.chef.Main();
             }
         }
 
