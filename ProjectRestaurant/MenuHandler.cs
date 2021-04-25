@@ -400,15 +400,22 @@ Change Creditcard  ");
 
             private void addDishes()
             {
-                var x = new option[json_dish.getDishList().Count];
-                for (int i = 0; i < x.Length; i++)
-                {
-                    x[i] = new option
+                Console.WriteLine("What is the name of the dish:\n");
+                string name = Console.ReadLine();
+                Console.WriteLine("What is the price of the dish:\n");
+                var price = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Add a description here:\n");
+                string description = Console.ReadLine();
+                Dish dish = new Dish()
                     {
-                        printToConsole = $"{json_dish.getDishList()[i].Title}",
-                        //func = json_dish.add(json_dish.getDishList()[i])
-                    };
-                }
+                        Title = name,
+                        Price = price,
+                        Description = description,
+                        Spotlighted = false,
+                        Categories = new List<string>()
+                };
+                json_dish.addDish(dish);
+                Main();
             }
 
             private void deleteDishes()

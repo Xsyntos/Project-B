@@ -149,21 +149,18 @@ namespace ProjectRestaurant
             return tes;
         }
 
-        public static Action add(Dish dish)
-        {
-            void x()
-            {
 
-            }
-            return x
-        }
-        public static void addDish(Dish dish)
+        public static Action addDish(Dish dish)
         {
-            var data = getDishList();
-            dish.UID = data.Count + 1;
-            data.Add(dish);
-            var jsonString = JsonSerializer.Serialize(data);
-            File.WriteAllText(@"dish.json", jsonString);
+            void tes()
+            {
+                var data = getDishList();
+                dish.UID = data.Count + 1;
+                data.Add(dish);
+                var jsonString = JsonSerializer.Serialize(data);
+                File.WriteAllText(@"dish.json", jsonString);
+            }
+            return tes;
         }
         public static void removeDish(int id)
         {
