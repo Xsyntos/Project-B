@@ -1,1 +1,10 @@
 /.vs
+ProjectRestaurant/obj/Debug/netcoreapp3.1/ProjectRestaurant.csprojAssemblyReference.cache
+ProjectRestaurant/obj/Debug/netcoreapp3.1/ProjectRestaurant.assets.cache
+ProjectRestaurant/obj/Debug/netcoreapp3.1/ProjectRestaurant.csprojAssemblyReference.cache
+*.cache
+ProjectRestaurant/obj/Debug/netcoreapp3.1/ProjectRestaurant.assets.cache
+ProjectRestaurant/bin/Debug/netcoreapp3.1/ProjectRestaurant.dll
+ProjectRestaurant/obj/Debug/netcoreapp3.1/ProjectRestaurant.dll
+*.dll
+*.dll

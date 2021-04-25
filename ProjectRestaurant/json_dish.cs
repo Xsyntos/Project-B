@@ -148,6 +148,15 @@ namespace ProjectRestaurant
             }
             return tes;
         }
+
+        public static Action add(Dish dish)
+        {
+            void x()
+            {
+
+            }
+            return x
+        }
         public static void addDish(Dish dish)
         {
             var data = getDishList();

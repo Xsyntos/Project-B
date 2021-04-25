@@ -351,6 +351,7 @@ Change Creditcard  ");
                    new option
                    {
                        printToConsole = "Add a Dish",
+                       func = addDishes
                    },
                    new option
                    {
@@ -361,6 +362,7 @@ Change Creditcard  ");
                    new option
                    {
                        printToConsole = "Delete a Dish",
+                       func = deleteDishes
                    },
                    new option
                    {
@@ -394,6 +396,38 @@ Change Creditcard  ");
                 };
                 menu.RunMenu();
 
+            }
+
+            private void addDishes()
+            {
+                var x = new option[json_dish.getDishList().Count];
+                for (int i = 0; i < x.Length; i++)
+                {
+                    x[i] = new option
+                    {
+                        printToConsole = $"{json_dish.getDishList()[i].Title}",
+                        //func = json_dish.add(json_dish.getDishList()[i])
+                    };
+                }
+            }
+
+            private void deleteDishes()
+            {
+                var x = new option[json_dish.getDishList().Count];
+                for (int i = 0; i < x.Length; i++)
+                {
+                    x[i] = new option
+                    {
+                        printToConsole = $"{json_dish.getDishList()[i].Title}",
+                        //func = 
+                    };
+                }
+                var menu = new Menu
+                {
+                    prefix = "Welcome Chef, what dish do you want to be removed?",
+                    options = x
+                };
+                menu.RunMenu();
             }
         }
 
