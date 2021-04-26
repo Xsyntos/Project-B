@@ -28,126 +28,89 @@ namespace ProjectRestaurant
             }
         }
 
-        public static Action update(Dish dish)
+        public static Action update(Dish dish, int num)
         {
-            void tes()
+            void f()
             {
-                var option = new List<option>();
-                option.Add(new option()
+                if (0 < num && num < 6)
                 {
-                    printToConsole = "Title",
-                    func = action(1)
-                });
-                option.Add(new option()
-                {
-                    printToConsole = "Price",
-                    func = action(2)
-                });
-                option.Add(new option()
-                {
-                    printToConsole = "Description",
-                    func = action(3)
-                });
-                option.Add(new option()
-                {
-                    printToConsole = "Spotlighted",
-                    func = action(4)
-                });
-                option.Add(new option()
-                {
-                    printToConsole = "Categories",
-                    func = action(5)
-                });
-
-                Action action(int num)
-                {
-                    void f()
+                    var data = getDishList();
+                    // Console.WriteLine("What do you want to change?");
+                    foreach (var i in data)
                     {
-                        if (0 < num && num < 6)
+                        if (i.UID == dish.UID)
                         {
-                            var data = getDishList();
-                            // Console.WriteLine("What do you want to change?");
-                            foreach (var i in data)
+                            if (num == 1)
                             {
-                                if (i.UID == dish.UID)
+                                Console.WriteLine("Type a name of the Dish");
+                                var key = Console.ReadLine();
+                                if (key.GetType() == i.Title.GetType())
                                 {
-                                    if (num == 1)
-                                    {
-                                        Console.WriteLine("Type a name of the Dish");
-                                        var key = Console.ReadLine();
-                                        if (key.GetType() == i.Title.GetType())
-                                            i.Title = key;
-                                        else
-                                            update(dish);
-                                    }
-                                    else if (num == 2)
-                                    {
-                                        var key = Console.ReadLine();
-                                        if (key.GetType() == i.Price.GetType())
-                                            i.Title = key;
-                                        else
-                                            update(dish);
-                                    }
-                                    else if (num == 3)
-                                    {
-                                        var key = Console.ReadLine();
-                                        if (key.GetType() == i.Description.GetType())
-                                            i.Title = key;
-                                        else
-                                            update(dish);
-                                    }
-                                    else if (num == 4)
-                                    {
-                                        Func<bool, bool> f = x => !x;
-                                        i.Spotlighted = f(i.Spotlighted);
-                                    }
-                                    else if (num == 5)
-                                    {
-                                        foreach (var cat in i.Categories)
-                                        {
-                                            int count = 1;
-                                            Console.WriteLine($"{count} : {cat}");
-                                        }
+                                    i.Title = key;
+                                    Console.WriteLine("Succesfully changed the name!");
 
-                                        Console.WriteLine($"Do you want to add or delete an category? Type 'add' or 'delete'");
-                                        var input = Console.ReadLine();
-                                        while (input != "add" || input != "delete")
-                                        {
-                                            Console.WriteLine($"Wrong keypress! Type 'add' or 'delete'");
-                                            input = Console.ReadLine();
-                                        }
-                                        if (input == "add")
-                                        {
-                                            Console.WriteLine($"Type the category to add");
-                                            var name = Console.ReadLine();
-                                            i.Categories.Append(name);
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine($"Type the category to delete");
-                                            var name = Console.ReadLine();
-                                            if (i.Categories.Any(e => e.EndsWith(name)))
-                                                i.Categories.Remove(name);
+                                }
+                            }
+                            else if (num == 2)
+                            {
+                                var key = Console.ReadLine();
+                                if (key.GetType() == i.Price.GetType())
+                                    i.Title = key;
+                                else
+                                    update(dish, num);
+                            }
+                            else if (num == 3)
+                            {
+                                var key = Console.ReadLine();
+                                if (key.GetType() == i.Description.GetType())
+                                    i.Title = key;
+                                else
+                                    update(dish, num);
+                            }
+                            else if (num == 4)
+                            {
+                                Func<bool, bool> f = x => !x;
+                                i.Spotlighted = f(i.Spotlighted);
+                            }
+                            else if (num == 5)
+                            {
+                                foreach (var cat in i.Categories)
+                                {
+                                    int count = 1;
+                                    Console.WriteLine($"{count} : {cat}");
+                                }
 
-                                            else
-                                                Console.WriteLine("Category does not exist.");
-                                        }
-                                    }
+                                Console.WriteLine($"Do you want to add or delete an category? Type 'add' or 'delete'");
+                                var input = Console.ReadLine();
+                                while (input != "add" || input != "delete")
+                                {
+                                    Console.WriteLine($"Wrong keypress! Type 'add' or 'delete'");
+                                    input = Console.ReadLine();
+                                }
+                                if (input == "add")
+                                {
+                                    Console.WriteLine($"Type the category to add");
+                                    var name = Console.ReadLine();
+                                    i.Categories.Append(name);
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"Type the category to delete");
+                                    var name = Console.ReadLine();
+                                    if (i.Categories.Any(e => e.EndsWith(name)))
+                                        i.Categories.Remove(name);
+
+                                    else
+                                        Console.WriteLine("Category does not exist.");
                                 }
                             }
                         }
                     }
-                    return f;
                 }
-                Menu menu = new Menu
-                {
-                    options = option.ToArray(),
-                    prefix = "Select an option"
-                };
-                menu.RunMenu();
             }
-            return tes;
+            return f;
         }
+
 
 
         public static Action addDish(Dish dish)
@@ -162,12 +125,17 @@ namespace ProjectRestaurant
             }
             return tes;
         }
-        public static void removeDish(int id)
+        public static Action removeDish(int id)
         {
-            var data = getDishList();
-            data.RemoveAll(i => i.UID == id);
-            var jsonString = JsonSerializer.Serialize(data);
-            File.WriteAllText(@"dish.json", jsonString);
+            void tes()
+            {
+
+                var data = getDishList();
+                data.RemoveAll(i => i.UID == id);
+                var jsonString = JsonSerializer.Serialize(data);
+                File.WriteAllText(@"dish.json", jsonString);
+            }
+            return tes;
         }
 
         public static List<Dish> getDishList()

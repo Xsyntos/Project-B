@@ -392,7 +392,7 @@ Change Creditcard  ");
                     x[i] = new option
                     {
                         printToConsole = $"{json_dish.getDishList()[i].Title}",
-                        func = json_dish.update(json_dish.getDishList()[i])
+                        func = listSettingsDish(json_dish.getDishList()[i])
                     };
                 }
                 var menu = new Menu
@@ -424,6 +424,55 @@ Change Creditcard  ");
                 Main();
             }
 
+            private Action listSettingsDish(Dish dish)
+            {
+                void tes()
+                {
+                    var option = new List<option>();
+                    option.Add(new option()
+                    {
+                        printToConsole = "Title",
+                        func = updateDish(dish, 1)
+                    });
+                    option.Add(new option()
+                    {
+                        printToConsole = "Price",
+                        func = updateDish(dish, 2)
+                    });
+                    option.Add(new option()
+                    {
+                        printToConsole = "Description",
+                        func = updateDish(dish, 3)
+                    });
+                    option.Add(new option()
+                    {
+                        printToConsole = "Spotlighted",
+                        func = updateDish(dish, 4)
+                    });
+                    option.Add(new option()
+                    {
+                        printToConsole = "Categories",
+                        func = updateDish(dish, 5)
+                    });
+
+                    Menu menu = new Menu
+                    {
+                        options = option.ToArray(),
+                        prefix = "Select an option"
+                    };
+                    menu.RunMenu();
+                }
+                return tes;
+            } 
+            private Action updateDish(Dish dish, int num)
+            {
+                void tes()
+                {
+                    json_dish.update(dish, num)();
+                    Main();
+                }
+                return tes;
+            }
             private void deleteDishes()
             {
                 var x = new option[json_dish.getDishList().Count];
@@ -432,7 +481,7 @@ Change Creditcard  ");
                     x[i] = new option
                     {
                         printToConsole = $"{json_dish.getDishList()[i].Title}",
-                        //func = 
+                        func = deleteDish(json_dish.getDishList()[i].UID)
                     };
                 }
                 var menu = new Menu
@@ -441,6 +490,17 @@ Change Creditcard  ");
                     options = x
                 };
                 menu.RunMenu();
+            }
+
+            private Action deleteDish(int id)
+            {
+                void tes()
+                {
+                    json_dish.removeDish(id)();
+                    Main();
+
+                }
+                return tes;
             }
         }
 
