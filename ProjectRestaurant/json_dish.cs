@@ -157,7 +157,7 @@ namespace ProjectRestaurant
                 var data = getDishList();
                 dish.UID = data.Count + 1;
                 data.Add(dish);
-                var jsonString = JsonSerializer.Serialize(data);
+                var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<Dish>>(data);
                 File.WriteAllText(@"dish.json", jsonString);
             }
             return tes;

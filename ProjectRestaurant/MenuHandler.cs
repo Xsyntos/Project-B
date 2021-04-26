@@ -52,9 +52,18 @@ namespace ProjectRestaurant
                 },
                 new option
                 {
-                    printToConsole = "Quit"
+                    printToConsole = "Quit",
+                    func = close
                 }
             };
+                void close() {
+                    for(int i = 0; i < 3; i++)
+                    {
+                        Console.Beep();
+                    }
+
+
+                    System.Environment.Exit(1); }
                 var menu = new Menu
                 {
                     options = optie,
@@ -116,13 +125,10 @@ Cancel Reservation  ");
                     new option
                     {
                         printToConsole = "Return",
-                        func = this.Main
-            }
+                        func = new MenuHandler().userMain
+                }
                     };
-                    if (client_variable.user.role == "guest")
-                    {
-                        options[1].func = new GuestMenus().Main;
-                    }
+                    
 
                     var menu = new Menu
                     {
@@ -400,11 +406,11 @@ Change Creditcard  ");
 
             private void addDishes()
             {
-                Console.WriteLine("What is the name of the dish:\n");
+                Console.WriteLine("What is the name of the dish:");
                 string name = Console.ReadLine();
-                Console.WriteLine("What is the price of the dish:\n");
+                Console.WriteLine("What is the price of the dish:");
                 var price = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("Add a description here:\n");
+                Console.WriteLine("Add a description here:");
                 string description = Console.ReadLine();
                 Dish dish = new Dish()
                     {
@@ -414,7 +420,7 @@ Change Creditcard  ");
                         Spotlighted = false,
                         Categories = new List<string>()
                 };
-                json_dish.addDish(dish);
+                json_dish.addDish(dish)();
                 Main();
             }
 
@@ -931,7 +937,7 @@ Change Creditcard  ");
                     Console.WriteLine("Reservation Complete\n" + "Reservation Code is: " + res.Id);
                     Console.WriteLine("Press Enter to continue...");
                     Console.ReadLine();
-                    this.Main();
+                    new MenuHandler().userMain();
                 }
                 return MakeReservationMenu;
             }
