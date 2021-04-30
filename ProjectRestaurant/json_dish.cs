@@ -20,8 +20,9 @@ namespace ProjectRestaurant
                     Price = 5.50,
                     Description = "Deze soep is gemaakt van linzen.",
                     Spotlighted = false,
-                    Categories = new List<string>()
-                });
+                    Categories = new List<string>(),
+                    Stock = 1
+                }); ;
 
                 string jsonString = JsonSerializer.Serialize(data);
                 File.WriteAllText(@"dish.json", jsonString);
@@ -32,10 +33,9 @@ namespace ProjectRestaurant
         {
             void f()
             {
-                if (0 < num && num < 6)
+                if (0 < num && num < 7)
                 {
                     var data = getDishList();
-                    // Console.WriteLine("What do you want to change?");
                     foreach (var i in data)
                     {
                         if (i.UID == dish.UID)
@@ -48,14 +48,13 @@ namespace ProjectRestaurant
                                 {
                                     i.Title = key;
                                     Console.WriteLine("Succesfully changed the name!");
-
                                 }
                             }
                             else if (num == 2)
                             {
-                                var key = Console.ReadLine();
+                                var key = Convert.ToDouble(Console.ReadLine());
                                 if (key.GetType() == i.Price.GetType())
-                                    i.Title = key;
+                                    i.Price = key;
                                 else
                                     update(dish, num);
                             }
@@ -63,7 +62,7 @@ namespace ProjectRestaurant
                             {
                                 var key = Console.ReadLine();
                                 if (key.GetType() == i.Description.GetType())
-                                    i.Title = key;
+                                    i.Description = key;
                                 else
                                     update(dish, num);
                             }
@@ -91,18 +90,26 @@ namespace ProjectRestaurant
                                 {
                                     Console.WriteLine($"Type the category to add");
                                     var name = Console.ReadLine();
-                                    i.Categories.Append(name);
+                                    i.AddCat(name);
                                 }
                                 else
                                 {
                                     Console.WriteLine($"Type the category to delete");
                                     var name = Console.ReadLine();
                                     if (i.Categories.Any(e => e.EndsWith(name)))
-                                        i.Categories.Remove(name);
+                                        i.RemoveCat(name);
 
                                     else
                                         Console.WriteLine("Category does not exist.");
                                 }
+                            }
+                            else if (num == 6)
+                            {
+                                var key = Convert.ToInt32(Console.ReadLine());
+                                if (key.GetType() == i.Stock.GetType())
+                                    i.UpdateStock(key);
+                                else
+                                    update(dish, num);
                             }
                         }
                     }
@@ -150,10 +157,11 @@ namespace ProjectRestaurant
             foreach (var x in data)
             {
                 Console.WriteLine($"Title: {x.Title}");
-                Console.WriteLine($"Price: {x.Price}"); // list comprehension for food for later when it will get changed.
+                Console.WriteLine($"Price: {x.Price}"); 
                 Console.WriteLine($"Description: {x.Description}");
                 Console.WriteLine($"This dish is currently {x.Spotlighted}");
                 Console.WriteLine($"Categories: {x.ShowAllCat()}");
+                Console.WriteLine($"Stock: {x.Stock}");
                 Console.WriteLine("-------------------------------");
             }
         }
