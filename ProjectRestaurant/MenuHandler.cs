@@ -418,7 +418,8 @@ Change Creditcard  ");
                         Price = price,
                         Description = description,
                         Spotlighted = false,
-                        Categories = new List<string>()
+                        Categories = new List<string>(),
+                        Stock = 0
                 };
                 json_dish.addDish(dish)();
                 Main();
@@ -453,6 +454,11 @@ Change Creditcard  ");
                     {
                         printToConsole = "Categories",
                         func = updateDish(dish, 5)
+                    });
+                    option.Add(new option()
+                    {
+                        printToConsole = "Categories",
+                        func = updateDish(dish, 6)
                     });
 
                     Menu menu = new Menu

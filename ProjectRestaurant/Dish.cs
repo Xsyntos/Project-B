@@ -12,8 +12,10 @@ namespace ProjectRestaurant
         public string Description { set; get; }
         public bool Spotlighted { set ; get; }
         public List<string> Categories{ set; get; }
+        public int Stock { set; get; }
 
-  
+
+
         public void ChangePrice(double amount)
         {
             Price = amount;
@@ -49,6 +51,11 @@ namespace ProjectRestaurant
                     Categories.Remove(name);
                 Console.WriteLine($"{name} has been succesfully removed!");
             }
+        }
+        
+        public void UpdateStock(int input)
+        {
+            Stock = input;
         }
     }
 }
