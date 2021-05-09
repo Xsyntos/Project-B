@@ -8,7 +8,7 @@ namespace ProjectRestaurant
     {
         public int UID { set; get; }
         public string Title { set; get; }
-        public double Price { set; get; }
+        public float Price { set; get; }
         public string Description { set; get; }
         public bool Spotlighted { set ; get; }
         public List<string> Categories{ set; get; }
@@ -18,7 +18,7 @@ namespace ProjectRestaurant
 
         public void ChangePrice(double amount)
         {
-            Price = amount;
+            Price = (float)amount;
         }
         public void SpotlightTrue()
         {

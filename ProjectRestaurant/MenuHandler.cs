@@ -42,7 +42,7 @@ namespace ProjectRestaurant
                 },
                 new option
                 {
-                    printToConsole =  "Registrate" ,
+                    printToConsole =  "Register" ,
                     func = Registration.RegistrationFirstVersion
                 },
                 new option
@@ -415,7 +415,7 @@ Change Creditcard  ");
                 Dish dish = new Dish()
                     {
                         Title = name,
-                        Price = price,
+                        Price = (float)price,
                         Description = description,
                         Spotlighted = false,
                         Categories = new List<string>(),
@@ -457,7 +457,7 @@ Change Creditcard  ");
                     });
                     option.Add(new option()
                     {
-                        printToConsole = "Categories",
+                        printToConsole = "Stock",
                         func = updateDish(dish, 6)
                     });
 
