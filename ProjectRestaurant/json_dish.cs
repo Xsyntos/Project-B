@@ -17,12 +17,12 @@ namespace ProjectRestaurant
                 {
                     UID = 1,
                     Title = "Linzen Soep",
-                    Price = 5.50,
+                    Price = (float)5.50,
                     Description = "Deze soep is gemaakt van linzen.",
                     Spotlighted = false,
                     Categories = new List<string>(),
                     Stock = 1
-                }); ;
+                });
 
                 string jsonString = JsonSerializer.Serialize(data);
                 File.WriteAllText(@"dish.json", jsonString);
@@ -47,43 +47,56 @@ namespace ProjectRestaurant
                                 if (key.GetType() == i.Title.GetType())
                                 {
                                     i.Title = key;
-                                    Console.WriteLine("Succesfully changed the name!");
+                                    Console.WriteLine("Succesfully changed the name! Press enter to continue...");
+                                    Console.ReadLine();
                                 }
                             }
                             else if (num == 2)
                             {
-                                var key = Convert.ToDouble(Console.ReadLine());
-                                if (key.GetType() == i.Price.GetType())
-                                    i.Price = key;
-                                else
-                                    update(dish, num);
+                                Console.WriteLine("Type a price of the Dish");
+                                double key;
+                                try
+                                {
+                                    key = Convert.ToDouble(Console.ReadLine());
+                                    i.Price = (float)key;
+                                }
+                                catch
+                                {
+                                    Console.WriteLine("Error: That was not a number! Press enter to continue...");
+                                    Console.ReadLine();
+                                    update(dish, 2);
+                                }   
                             }
                             else if (num == 3)
                             {
+                                Console.WriteLine("Type the Description of the Dish");
                                 var key = Console.ReadLine();
                                 if (key.GetType() == i.Description.GetType())
                                     i.Description = key;
-                                else
-                                    update(dish, num);
+                                    Console.WriteLine("Succesfully changed the description! Press enter to continue...");
+                                    Console.ReadLine();
                             }
                             else if (num == 4)
                             {
                                 Func<bool, bool> f = x => !x;
                                 i.Spotlighted = f(i.Spotlighted);
+                                Console.WriteLine($"Succesfully changed the Spotlighten to {i.Spotlighted}! Press enter to continue...");
+                                Console.ReadLine();
                             }
                             else if (num == 5)
                             {
+                                int count = 1;
                                 foreach (var cat in i.Categories)
                                 {
-                                    int count = 1;
-                                    Console.WriteLine($"{count} : {cat}");
+                                    Console.WriteLine($"{count++} : {cat}");
                                 }
 
                                 Console.WriteLine($"Do you want to add or delete an category? Type 'add' or 'delete'");
                                 var input = Console.ReadLine();
-                                while (input != "add" || input != "delete")
+                                while (input != "add" && input != "delete")
                                 {
                                     Console.WriteLine($"Wrong keypress! Type 'add' or 'delete'");
+                                    Console.WriteLine(input);
                                     input = Console.ReadLine();
                                 }
                                 if (input == "add")
@@ -91,28 +104,48 @@ namespace ProjectRestaurant
                                     Console.WriteLine($"Type the category to add");
                                     var name = Console.ReadLine();
                                     i.AddCat(name);
+                                    Console.WriteLine("Succesfully added a category! Press enter to continue...");
+                                    Console.ReadLine();
                                 }
                                 else
                                 {
                                     Console.WriteLine($"Type the category to delete");
                                     var name = Console.ReadLine();
                                     if (i.Categories.Any(e => e.EndsWith(name)))
+                                    {
                                         i.RemoveCat(name);
-
+                                        Console.WriteLine("Succesfully changed the description! Press enter to continue...");
+                                        Console.ReadLine();
+                                    }
                                     else
-                                        Console.WriteLine("Category does not exist.");
+                                    {
+                                        Console.WriteLine("Category does not exist. Press enter to continue...");
+                                        Console.ReadLine();
+                                    }
                                 }
                             }
                             else if (num == 6)
                             {
-                                var key = Convert.ToInt32(Console.ReadLine());
-                                if (key.GetType() == i.Stock.GetType())
+                                int key;
+                                try
+                                {
+                                    Console.WriteLine("Type the amount of the Stock.");
+                                    key = Convert.ToInt32(Console.ReadLine());
                                     i.UpdateStock(key);
-                                else
-                                    update(dish, num);
+                                    Console.WriteLine("Succesfully changed the Stock. Press enter to continue...");
+                                    Console.ReadLine();
+                                }
+                                catch
+                                {
+                                    Console.WriteLine("Error: That was not a number! Press enter to try again...");
+                                    Console.ReadLine();
+                                    update(dish, 6);
+                                }
                             }
                         }
                     }
+                    var jsonString = JsonSerializer.Serialize(data);
+                    File.WriteAllText(@"dish.json", jsonString);
                 }
             }
             return f;
