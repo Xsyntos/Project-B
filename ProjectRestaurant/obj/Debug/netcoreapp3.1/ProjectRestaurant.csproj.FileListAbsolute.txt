@@ -24,3 +24,16 @@ C:\Users\Raysu\Documents\School\2020 - 2021\Projects\Project B\ProjectRestaurant
 C:\Users\Raysu\Documents\School\2020 - 2021\Projects\Project B\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.dll
 C:\Users\Raysu\Documents\School\2020 - 2021\Projects\Project B\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.pdb
 C:\Users\Raysu\Documents\School\2020 - 2021\Projects\Project B\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.genruntimeconfig.cache
+C:\Users\Hamed\OneDrive\Documenten\GitHub\ProjectRestaurant\ProjectRestaurant\bin\Debug\netcoreapp3.1\ProjectRestaurant.exe
+C:\Users\Hamed\OneDrive\Documenten\GitHub\ProjectRestaurant\ProjectRestaurant\bin\Debug\netcoreapp3.1\ProjectRestaurant.deps.json
+C:\Users\Hamed\OneDrive\Documenten\GitHub\ProjectRestaurant\ProjectRestaurant\bin\Debug\netcoreapp3.1\ProjectRestaurant.runtimeconfig.json
+C:\Users\Hamed\OneDrive\Documenten\GitHub\ProjectRestaurant\ProjectRestaurant\bin\Debug\netcoreapp3.1\ProjectRestaurant.runtimeconfig.dev.json
+C:\Users\Hamed\OneDrive\Documenten\GitHub\ProjectRestaurant\ProjectRestaurant\bin\Debug\netcoreapp3.1\ProjectRestaurant.dll
+C:\Users\Hamed\OneDrive\Documenten\GitHub\ProjectRestaurant\ProjectRestaurant\bin\Debug\netcoreapp3.1\ProjectRestaurant.pdb
+C:\Users\Hamed\OneDrive\Documenten\GitHub\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.csprojAssemblyReference.cache
+C:\Users\Hamed\OneDrive\Documenten\GitHub\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.AssemblyInfoInputs.cache
+C:\Users\Hamed\OneDrive\Documenten\GitHub\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.AssemblyInfo.cs
+C:\Users\Hamed\OneDrive\Documenten\GitHub\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.csproj.CoreCompileInputs.cache
+C:\Users\Hamed\OneDrive\Documenten\GitHub\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.dll
+C:\Users\Hamed\OneDrive\Documenten\GitHub\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.pdb
+C:\Users\Hamed\OneDrive\Documenten\GitHub\ProjectRestaurant\ProjectRestaurant\obj\Debug\netcoreapp3.1\ProjectRestaurant.genruntimeconfig.cache
