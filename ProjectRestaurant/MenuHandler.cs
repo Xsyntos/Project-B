@@ -324,7 +324,14 @@ Change Creditcard  ");
                },
                new option
                {
-                   printToConsole = "Tables"
+                   printToConsole = "Menu"
+                
+               },
+               new option
+               {
+                   printToConsole = "Change prices",
+                   func = getAllDishes
+                   
                },
                new option
                {
@@ -384,7 +391,7 @@ Change Creditcard  ");
                 menu.RunMenu();
             }
 
-            private void getAllDishes()
+            protected void getAllDishes()
             {
                 var x = new option[json_dish.getDishList().Count];
                 for (int i = 0; i < x.Length; i++)
@@ -470,7 +477,7 @@ Change Creditcard  ");
                 }
                 return tes;
             } 
-            private Action updateDish(Dish dish, int num)
+            protected Action updateDish(Dish dish, int num)
             {
                 void tes()
                 {
