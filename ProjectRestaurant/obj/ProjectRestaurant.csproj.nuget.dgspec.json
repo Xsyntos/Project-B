@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\school\\Project\\ProjectRestaurant\\ProjectRestaurant\\ProjectRestaurant\\ProjectRestaurant.csproj": {}
+    "C:\\Users\\Hamed\\OneDrive\\Documenten\\GitHub\\ProjectRestaurant\\ProjectRestaurant\\ProjectRestaurant.csproj": {}
   },
   "projects": {
-    "D:\\school\\Project\\ProjectRestaurant\\ProjectRestaurant\\ProjectRestaurant\\ProjectRestaurant.csproj": {
+    "C:\\Users\\Hamed\\OneDrive\\Documenten\\GitHub\\ProjectRestaurant\\ProjectRestaurant\\ProjectRestaurant.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\school\\Project\\ProjectRestaurant\\ProjectRestaurant\\ProjectRestaurant\\ProjectRestaurant.csproj",
+        "projectUniqueName": "C:\\Users\\Hamed\\OneDrive\\Documenten\\GitHub\\ProjectRestaurant\\ProjectRestaurant\\ProjectRestaurant.csproj",
         "projectName": "ProjectRestaurant",
-        "projectPath": "D:\\school\\Project\\ProjectRestaurant\\ProjectRestaurant\\ProjectRestaurant\\ProjectRestaurant.csproj",
-        "packagesPath": "C:\\Users\\Steve\\.nuget\\packages\\",
-        "outputPath": "D:\\school\\Project\\ProjectRestaurant\\ProjectRestaurant\\ProjectRestaurant\\obj\\",
+        "projectPath": "C:\\Users\\Hamed\\OneDrive\\Documenten\\GitHub\\ProjectRestaurant\\ProjectRestaurant\\ProjectRestaurant.csproj",
+        "packagesPath": "C:\\Users\\Hamed\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Hamed\\OneDrive\\Documenten\\GitHub\\ProjectRestaurant\\ProjectRestaurant\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Steve\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Hamed\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -54,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }
