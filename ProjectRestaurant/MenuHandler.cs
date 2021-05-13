@@ -314,7 +314,7 @@ Change Creditcard  ");
         }
         protected class AdminMenus : ChefMenus
         {
-            public void Main()
+            public new void Main()
             {
                 var x = new option[]
                 {
@@ -705,6 +705,7 @@ Change Creditcard  ");
             }
             protected void Menu()
             {
+                
                 var list = new List<option>();
 
                 list.Add(new option
@@ -808,7 +809,7 @@ Change Creditcard  ");
                 new option
                 {
                     printToConsole = "Take Away",
-                    func = Takeaway.Takeawayinput
+                    func = takeaway
 
                 },
                 new option
@@ -1034,6 +1035,331 @@ Change Creditcard  ");
                 };
                 menu.RunMenu();
             }
+            //take-away
+            protected void takeaway()
+            {
+                var food = new List<Dish>();
+                void cat()
+                {
+                    bool isInCat(string s)
+                    {
+                        return client_variable.dish_catagory.ToArray().Intersect(new string[] { s }).Any();
+                    }
+
+                    var opties = new option[]
+                    {
+                    new option
+                    {
+                        printToConsole = $"Children Food <{isInCat("childrenfood")}>",
+                        func = () =>
+                        {
+                            if (isInCat("childrenfood"))
+                            {
+                                client_variable.dish_catagory.Remove("childrenfood");
+                            }
+                            else
+                            {
+                                client_variable.dish_catagory.Add("childrenfood");
+                            }
+                            cat();
+                        }
+
+                    },
+                    new option
+                    {
+                        printToConsole = $"Vegan <{isInCat("vegan")}>",
+                        func = () =>
+                        {
+                            if (isInCat("vegan"))
+                            {
+                                client_variable.dish_catagory.Remove("vegan");
+                            }
+                            else
+                            {
+                                client_variable.dish_catagory.Add("vegan");
+                            }
+                            cat();
+                        }
+
+                    },
+                    new option
+                    {
+                        printToConsole = $"Meat <{isInCat("meat")}>",
+                        func = () =>
+                        {
+                            if (isInCat("meat"))
+                            {
+                                client_variable.dish_catagory.Remove("meat");
+                            }
+                            else
+                            {
+                                client_variable.dish_catagory.Add("meat");
+                            }
+                            cat();
+                        }
+
+                    },
+                    new option
+                    {
+                        printToConsole = $"Lunch <{isInCat("lunch")}>",
+                        func = () =>
+                        {
+                            if (isInCat("lunch"))
+                            {
+                                client_variable.dish_catagory.Remove("lunch");
+                            }
+                            else
+                            {
+                                client_variable.dish_catagory.Add("lunch");
+                            }
+                            cat();
+                        }
+
+                    },
+                    new option
+                    {
+                        printToConsole = $"Dinner <{isInCat("dinner")}>",
+                        func = () =>
+                        {
+                            if (isInCat("dinner"))
+                            {
+                                client_variable.dish_catagory.Remove("dinner");
+                            }
+                            else
+                            {
+                                client_variable.dish_catagory.Add("dinner");
+                            }
+                            cat();
+                        }
+
+                    },
+                    new option
+                    {
+                        printToConsole = $"Turkish Food <{isInCat("turk")}>",
+                        func = () =>
+                        {
+                            if (isInCat("turk"))
+                            {
+                                client_variable.dish_catagory.Remove("turk");
+                            }
+                            else
+                            {
+                                client_variable.dish_catagory.Add("turk");
+                            }
+                            cat();
+                        }
+
+                    },
+                    new option
+                    {
+                        printToConsole = $"Return",
+                        func = foods
+
+
+                    }
+                    };
+                    Menu men = new Menu()
+                    {
+                        options = opties,
+                        prefix = "Filters"
+                    };
+                    men.RunMenu();
+                }
+                void foods()
+                {
+
+                    var list = new List<option>();
+
+                    list.Add(new option
+                    {
+                        printToConsole = "Filters",
+                        func = cat 
+                    });
+                    Action dishitem(Dish d)
+                    {
+                        void func()
+                        {
+                            food.Add(d);
+                            Console.WriteLine($"{d.Title} added to takeaway!\nPress Enter to Continue...");
+                            Console.ReadKey();
+                            foods();
+
+                        }
+                        return func;
+                    }
+
+
+                    foreach (var dish in json_dish.getDishList())
+                    {
+                        if (dish.Spotlighted)
+                        {
+                            if (dish.Categories.ToArray().Intersect(client_variable.dish_catagory.ToArray()).Any() || client_variable.dish_catagory.Count == 0)
+                                list.Add(new option
+                                {
+                                    printToConsole = "-=- " + dish.Title + " -=-",
+                                    func = dishitem(dish)
+                                });
+                        }
+                    }
+                    foreach (var dish in json_dish.getDishList())
+                    {
+
+                        if (!dish.Spotlighted)
+                        {
+                            if (dish.Categories.ToArray().Intersect(client_variable.dish_catagory.ToArray()).Any() || client_variable.dish_catagory.Count == 0)
+                                list.Add(new option
+                                {
+                                    printToConsole = dish.Title,
+                                    func = dishitem(dish)
+                                });
+                        }
+                    }
+                    list.Add(new option
+                    {
+                        printToConsole = "Finish your Take-Away!",
+                        func = takeaway2(food)
+                    });
+                    list.Add(new option
+                    {
+                        printToConsole = "Return",
+                        func = new MenuHandler().userMain
+                    });
+
+                    Menu men = new Menu()
+                    {
+                        options = list.ToArray(),
+                        prefix = "Menu"
+                    };
+                    men.RunMenu();
+
+
+                }
+                foods();
+            }
+            protected Action takeaway2(List<Dish> dishes)
+            {
+                void f()
+                {
+                    var x = 22 - DateTime.Now.Hour;
+                    var optie = new List<option>();
+
+                    for(int i = 0; i < x; i++)
+                    {
+                        optie.Add(new option()
+                        {
+                            printToConsole = $"{DateTime.Now.Hour + i+1}:00",
+                            func = takeaway3(dishes, new DateTime(DateTime.Now.Year,DateTime.Now.Month, DateTime.Now.Day, (DateTime.Now.Hour + i + 1),0,0))
+                        });
+                    }
+                    optie.Add(new option() {
+                        printToConsole = "Return",
+                        func = new MenuHandler().userMain
+                    });
+
+                    var men = new Menu()
+                    {
+                        options = optie.ToArray(),
+                        prefix = "Select a Time to pick up your take-away"
+                    };
+                    men.RunMenu();
+
+                }
+                return f;
+            }
+            protected Action takeaway3(List<Dish> dishes, DateTime date)
+            {
+                void f() {
+                    if (client_variable.user.role == "guest")
+                    {
+                        Console.WriteLine("Enter your Creditcard Number! Or type 'cancel' to cancel the creation of a take-away");
+                        var credit = Console.ReadLine();
+                        if (credit.ToUpper() == "CANCEL")
+                        {
+                            new MenuHandler().userMain();
+                        }
+                        else if (Checker.Check(credit))
+                        {
+                            client_variable.user.creditcard = credit;
+                            Console.WriteLine("Please enter your Name!");
+                            client_variable.user.username = Console.ReadLine();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Creditcard number!\nPress a Key to continue...");
+                            Console.ReadKey();
+                            this.takeaway3(dishes, date);
+                        }
+                    }
+                    else
+                    {
+                        if (client_variable.user.creditcard == "123")
+                        {
+                            Console.WriteLine("Enter your Creditcard Number! Or type 'cancel' to cancel the creation of a take-away");
+                            var credit = Console.ReadLine();
+                            if (credit.ToUpper() == "CANCEL")
+                            {
+                                new MenuHandler().userMain();
+                            }
+                            else if (Checker.Check(credit))
+                            {
+                                client_variable.user.creditcard = credit;
+                                json_customer.updateUserFromClient();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid Creditcard number!\nPress a Key to continue...");
+                                Console.ReadKey();
+                                this.takeaway3(dishes, date);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Do you want to use your account creditcard? YES/NO");
+                            string x = Console.ReadLine();
+
+                            if (!(x.ToUpper() == "YES" || x.ToUpper() == "Y"))
+                            {
+
+                                Console.WriteLine("Enter your Creditcard Number! Or type 'cancel' to cancel the creation of a take-away");
+                                var credit = Console.ReadLine();
+                                if (credit.ToUpper() == "CANCEL")
+                                {
+                                    new MenuHandler().userMain();
+                                }
+                                else if (Checker.Check(credit))
+                                {
+                                    client_variable.user.creditcard = credit;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid Creditcard number!\nPress a Key to continue...");
+                                    Console.ReadKey();
+                                    this.takeaway3(dishes, date);
+                                }
+                            }
+
+                        }
+                    }
+                    var ids = new List<int>();
+                    double totalprice = 0.0;
+                    foreach(var x in dishes )
+                    {
+                        ids.Add(x.UID);
+                        totalprice += x.Price;
+                    }
+                    
+                    json_takeaway.addtakeaway(ids.ToArray(), client_variable.user, date);
+                    Console.WriteLine("Ordered Dishes:");
+                    foreach (var dish in dishes)
+                    {
+                        Console.WriteLine(dish.Title);
+                    }
+                    Console.WriteLine($"Succesfully created a take-away with a total price of {totalprice} euro. Press Enter to Continue...");
+                    Console.ReadKey();
+                    new MenuHandler().userMain();
+                }
+                return f;
+            }
         }
         protected class GuestMenus : CustomerMenus
         {
@@ -1062,7 +1388,8 @@ Change Creditcard  ");
                 });
                 options.Add(new option
                 {
-                    printToConsole = "Take-Away"
+                    printToConsole = "Take-Away",
+                    func = takeaway
                 });
                 options.Add(new option
                 {
