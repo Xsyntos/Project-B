@@ -329,6 +329,11 @@ Change Creditcard  ");
                },
                new option
                {
+                   printToConsole = "View all Dishes",
+                   func = displayAllDishes
+               },
+               new option
+               {
                    printToConsole = "Change prices",
                    func = getAllDishes
                    
