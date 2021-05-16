@@ -192,11 +192,13 @@ namespace ProjectRestaurant
                 Console.WriteLine($"Title: {x.Title}");
                 Console.WriteLine($"Price: {x.Price}"); 
                 Console.WriteLine($"Description: {x.Description}");
-                Console.WriteLine($"This dish is currently {x.Spotlighted}");
+                Console.WriteLine($"This dish is currently{(x.Spotlighted ? "" : " not")} Spotlighted");
                 Console.WriteLine($"Categories: {x.ShowAllCat()}");
                 Console.WriteLine($"Stock: {x.Stock}");
                 Console.WriteLine("-------------------------------");
             }
+            Console.WriteLine("\nPress enter to continue...");
+            Console.ReadLine();
         }
         public static Dish getDish(int id)
         {
