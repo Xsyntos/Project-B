@@ -34,7 +34,7 @@ namespace ProjectRestaurant
             string result = "";
             foreach (string cat in Categories)
             {
-                result += $"{num++} {cat}.\n";
+                result += $"{num++}: {cat}. ";
             }
             return result;
         }
