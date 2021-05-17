@@ -44,6 +44,7 @@ Registration  ");
                 else
                 {
                     Console.WriteLine("Pasword or Username are incorrect, Please try again");
+                    RegistrationFirstVersion();
                 }
 
             }
