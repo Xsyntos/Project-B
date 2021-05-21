@@ -97,7 +97,7 @@ namespace ProjectRestaurant
             void tes()
             {
                 var data = getUserlist();
-                data.RemoveAll(u => u == user);
+                data.RemoveAll(u => u.Id == user.Id);
                 var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<user>>(data);
                 File.WriteAllText(@"users.json", jsonString);
             }

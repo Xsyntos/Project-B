@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Reflection;
 
 namespace ProjectRestaurant
 {
@@ -376,12 +377,12 @@ Change Creditcard  ");
                     new option
                     {
                         printToConsole = "Update a User",
-                        func = getAllUsers(roleOptions)
+                        func = getUsersUpdate
                     },
                     new option
                     {
                         printToConsole = "Delete a User",
-                        func = getAllUsers(Delete)
+                        func = getUsersDelete
                     },
                     new option
                     {
@@ -401,7 +402,7 @@ Change Creditcard  ");
                 json_customer.displayAllUsers();
                 editUserMenu();
             }
-            private void getAllUsers(Func<Action> f)
+            private void getUsersUpdate()
             {
                 var x = new option[json_customer.getUserlist().Count + 1];
                 for (int i = 0; i < json_customer.getUserlist().Count; i++)
@@ -409,8 +410,35 @@ Change Creditcard  ");
                     x[i] = new option
                     {
                         printToConsole = $"{json_customer.getUserlist()[i].username}",
-                        func = f(json_customer.getUserlist()[i])
+                        func = roleOptions(json_customer.getUserlist()[i])
                     };
+                }
+                x[x.Length - 1] = new option
+                {
+                    printToConsole = "Return",
+                    func = Main
+                };
+                var menu = new Menu
+                {
+                    prefix = $"Welcome {client_variable.user.role}",
+                    options = x
+                };
+                menu.RunMenu();
+
+            }
+            private void getUsersDelete()
+            {
+                var x = new option[json_customer.getUserlist().Count + 1];
+                for (int i = 0; i < json_customer.getUserlist().Count; i++)
+                {
+                    //if (json_customer.getUserlist()[i].role != "admin")
+                    //{
+                        x[i] = new option
+                        {
+                            printToConsole = $"{json_customer.getUserlist()[i].username}",
+                            func = Delete(json_customer.getUserlist()[i])
+                        };
+                    //}
                 }
                 x[x.Length - 1] = new option
                 {
@@ -481,8 +509,9 @@ Change Creditcard  ");
             private Action Delete(user user)
             {
                 void tes()
-                {
-                    json_customer.delete(user)();
+                {  
+                    if(user.role != "admin")
+                        json_customer.delete(user)();
                     Main();
                 }
                 return tes;
