@@ -340,6 +340,11 @@ Change Creditcard  ");
                },
                new option
                {
+                   printToConsole = "Edit Users",
+                   func = editUserMenu
+               },
+               new option
+               {
                    printToConsole = "Change Account settings",
                    func = accountSettings
                },
@@ -358,6 +363,129 @@ Change Creditcard  ");
                 };
                 menu.RunMenu();
 
+            }
+            private void editUserMenu()
+            {
+               var x = new option[]
+               {
+                    new option
+                    {
+                        printToConsole = "View all Users",
+                        func = displayAllUsers
+                    },
+                    new option
+                    {
+                        printToConsole = "Update a User",
+                        func = getAllUsers(roleOptions)
+                    },
+                    new option
+                    {
+                        printToConsole = "Delete a User",
+                        func = getAllUsers(Delete)
+                    },
+                    new option
+                    {
+                        printToConsole = "Return",
+                        func = Main
+                    }
+               };
+               var menu = new Menu
+               {
+                    prefix = "Welcome Boss",
+                    options = x
+               };
+               menu.RunMenu();
+            }
+            private void displayAllUsers()
+            {
+                json_customer.displayAllUsers();
+                editUserMenu();
+            }
+            private void getAllUsers(Func<Action> f)
+            {
+                var x = new option[json_customer.getUserlist().Count + 1];
+                for (int i = 0; i < json_customer.getUserlist().Count; i++)
+                {
+                    x[i] = new option
+                    {
+                        printToConsole = $"{json_customer.getUserlist()[i].username}",
+                        func = f(json_customer.getUserlist()[i])
+                    };
+                }
+                x[x.Length - 1] = new option
+                {
+                    printToConsole = "Return",
+                    func = Main
+                };
+                var menu = new Menu
+                {
+                    prefix = $"Welcome {client_variable.user.role}",
+                    options = x
+                };
+                menu.RunMenu();
+
+            }
+            private Action roleOptions(user user)
+            {
+                void tes()
+                {
+                    var x = new option[]
+                    {
+                        new option
+                        {
+                            printToConsole = "Customer",
+                            func = UpdateRole(user, "customer")
+                        },
+                        new option
+                        {
+                            printToConsole = "Cashier",
+                            func = UpdateRole(user, "cashier")
+                        },
+                        new option
+                        {
+                            printToConsole = "Chef",
+                            func = UpdateRole(user, "chef")
+                        },
+                        new option
+                        {
+                            printToConsole = "Return",
+                            func = editUserMenu
+                        }
+                    };
+                    var menu = new Menu
+                    {
+                        prefix = "Select a role",
+                        options = x
+                    };
+                    menu.RunMenu();
+                }
+                return tes;
+            }
+            private Action UpdateRole(user user, string role)
+            {
+                void tes()
+                {
+                    try
+                    {
+                        json_customer.Update(user, role)();
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Error!!!!!");
+                        Console.ReadLine();
+                    }
+                    Main();
+                }
+                return tes;
+            }
+            private Action Delete(user user)
+            {
+                void tes()
+                {
+                    json_customer.delete(user)();
+                    Main();
+                }
+                return tes;
             }
         }
         protected class ChefMenus : GeneralMenus
