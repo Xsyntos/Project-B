@@ -800,11 +800,14 @@ Change Creditcard  ");
                         printToConsole = "Title",
                         func = updateDish(dish, 1)
                     });
-                    option.Add(new option()
+                    if (client_variable.user.role == "admin")
                     {
-                        printToConsole = "Price",
-                        func = updateDish(dish, 2)
-                    });
+                        option.Add(new option()
+                        {
+                            printToConsole = "Price",
+                            func = updateDish(dish, 2)
+                        });
+                    }
                     option.Add(new option()
                     {
                         printToConsole = "Description",
