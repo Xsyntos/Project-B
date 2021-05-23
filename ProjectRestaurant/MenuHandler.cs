@@ -344,6 +344,11 @@ Change Creditcard  ");
                    printToConsole = "Edit Users",
                    func = editUserMenu
                },
+                new option
+               {
+                   printToConsole = "Edit tables",
+                   func = capacity
+               },
                new option
                {
                    printToConsole = "Change Account settings",
@@ -365,7 +370,182 @@ Change Creditcard  ");
                 menu.RunMenu();
 
             }
-            private void editUserMenu()
+            private void capacity()
+            {
+                var availabletables = json_table.getTableList();
+                var option = new List<option>();
+                foreach (var i in availabletables)
+                {
+                    if (i.vip)
+                    {
+                        option.Add(new option
+                        {
+                            printToConsole = $"{i.Id}. {i.capacity} persons VIP",
+                            func = editTable(i)
+                        }
+                        );
+                    }
+                    else
+                    {
+                        option.Add(new option
+                        {
+                            printToConsole = $"{i.Id}. {i.capacity} persons",
+                            func = editTable(i)
+                        }
+                        );
+                    }
+
+
+                }
+                option.Add(new option
+                {
+                    printToConsole = "Add Table",
+                    func = createTable
+                });
+                option.Add(new option
+                {
+                    printToConsole = "Return",
+                    func = new MenuHandler().userMain
+                });
+                Menu menu = new Menu
+                {
+                    options = option.ToArray(),
+                    prefix = "Select a Table"
+
+                };
+
+                menu.RunMenu();
+            }
+            private Action editTable(table t)
+            {
+                void f()
+                {
+                    var optie = new option[] {
+                        new option()
+                        {
+                            printToConsole = "Change VIP",
+                            func = () =>
+                            {
+                                json_table.changeVIP(t.Id);
+                                editTable(json_table.getTableFromId(t.Id))();
+                            }
+                        },
+                        new option()
+                        {
+                            printToConsole = "Change Capacity",
+                            func = () =>
+                            {
+                                int x = 0;
+                                Console.WriteLine("Enter the new Capacity!");
+                                string input = Console.ReadLine();
+                                try
+                                {
+                                    x = Int32.Parse(input);
+                                }
+                                catch
+                                {
+                                    Console.WriteLine("Invalid input! Press Enter to Continue...");
+                                    Console.ReadKey();
+                                    editTable(json_table.getTableFromId(t.Id))();
+                                }
+                                if(x <= 0)
+                                {
+                                    Console.WriteLine("Invalid input! Press Enter to Continue...");
+                                    Console.ReadKey();
+                                    editTable(json_table.getTableFromId(t.Id))();
+                                }
+                                json_table.changeCap(t.Id, x);
+                                editTable(json_table.getTableFromId(t.Id))();
+                            }
+                        },
+                        new option()
+                        {
+                            printToConsole = "Return",
+                            func = capacity
+                        }
+                    };
+
+                    var men = new Menu()
+                    {
+                        prefix = $"Id: {t.Id}\nCapacity: {t.capacity}\nVIP: {t.vip}",
+                        options = optie
+                    };
+                    men.RunMenu();
+
+                }
+                return f;
+            }
+
+            private void createTable()
+            {
+                Console.Clear();
+                string prompt = @$"
+
+                                           
+ _____         _                       _   
+| __  |___ ___| |_ ___ _ _ ___ ___ ___| |_ 
+|    -| -_|_ -|  _| .'| | |  _| .'|   |  _|
+|__|__|___|___|_| |__,|___|_| |__,|_|_|_|";
+                prompt += "\n+-------------------------------------------------------------+\n";
+                prompt += "Create Table";
+                prompt += "\n+-------------------------------------------------------------+";
+                Console.WriteLine(prompt);
+                Console.WriteLine("For how many guests is the table? (Type q or quit to cancel the table creation!)");
+                string input = Console.ReadLine();
+                if (input.ToUpper() == "Q" || input.ToUpper() == "QUIT")
+                {
+                    Console.WriteLine("Table Creation canceled! Press Enter to continue...");
+                    Console.ReadKey();
+                    this.capacity();
+                }
+                else
+                {
+                    int x = 0;
+                    try
+                    {
+                        x = Int32.Parse(input);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Invalid input! Press Enter to continue...");
+                        Console.ReadKey();
+                        this.capacity();
+                    }
+                    if (x <= 0)
+                    {
+                        Console.WriteLine("Invalid input! Press Enter to continue...");
+                        Console.ReadKey();
+                        this.capacity();
+                    }
+                    Console.WriteLine("Is the table VIP type 'Yes' or 'No'? (Type an invalid input to cancel the table creation!)");
+                    string input2 = Console.ReadLine();
+                    if (input2.ToUpper() == "YES" || input2.ToUpper() == "Y")
+                    {
+                        json_table.addTable(x, true);
+                        Console.WriteLine("You have added succesfully a table! Press Enter to continue...");
+                        Console.ReadKey();
+                        this.capacity();
+                    }
+                    else if (input2.ToUpper() == "NO" || input2.ToUpper() == "N")
+                    {
+                        json_table.addTable(x, false);
+                        Console.WriteLine("You have added succesfully a table! Press Enter to continue...");
+                        Console.ReadKey();
+                        this.capacity();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Table Creation canceled! Press Enter to continue...");
+                        Console.ReadKey();
+                        this.capacity();
+                    }
+                }
+
+
+            }
+
+
+            private void editUserMenu() 
             {
                var x = new option[]
                {
