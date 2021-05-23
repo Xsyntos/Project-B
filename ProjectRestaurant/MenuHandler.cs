@@ -1184,7 +1184,7 @@ Change Creditcard  ");
                 new option
                 {
                     printToConsole = "Take Away",
-                    func = takeaway
+                    func = takeaway()
 
                 },
                 new option
@@ -1411,18 +1411,21 @@ Change Creditcard  ");
                 menu.RunMenu();
             }
             //take-away
-            protected void takeaway()
+            protected Action takeaway(List<Dish> food = null)
             {
-                var food = new List<Dish>();
-                void cat()
+                if (food is null)
+                    food = new List<Dish>();
+                void func()
                 {
-                    bool isInCat(string s)
+                    void cat()
                     {
-                        return client_variable.dish_catagory.ToArray().Intersect(new string[] { s }).Any();
-                    }
+                        bool isInCat(string s)
+                        {
+                            return client_variable.dish_catagory.ToArray().Intersect(new string[] { s }).Any();
+                        }
 
-                    var opties = new option[]
-                    {
+                        var opties = new option[]
+                        {
                     new option
                     {
                         printToConsole = $"Children Food <{isInCat("childrenfood")}>",
@@ -1532,85 +1535,107 @@ Change Creditcard  ");
 
 
                     }
-                    };
-                    Menu men = new Menu()
+                        };
+                        Menu men = new Menu()
+                        {
+                            options = opties,
+                            prefix = "Filters"
+                        };
+                        men.RunMenu();
+                    }
+                    void foods()
                     {
-                        options = opties,
-                        prefix = "Filters"
-                    };
-                    men.RunMenu();
+
+                        var list = new List<option>();
+
+                        list.Add(new option
+                        {
+                            printToConsole = "Filters",
+                            func = cat
+                        });
+                        Action dishitem(Dish d)
+                        {
+                            void func()
+                            {
+                                food.Add(d);
+                                Console.WriteLine($"{d.Title} added to takeaway!\nPress Enter to Continue...");
+                                Console.ReadKey();
+                                foods();
+
+                            }
+                            return func;
+                        }
+
+
+                        foreach (var dish in json_dish.getDishList())
+                        {
+                            if (dish.Spotlighted)
+                            {
+                                if (dish.Categories.ToArray().Intersect(client_variable.dish_catagory.ToArray()).Any() || client_variable.dish_catagory.Count == 0)
+                                    list.Add(new option
+                                    {
+                                        printToConsole = "-=- " + dish.Title + " -=-",
+                                        func = dishitem(dish)
+                                    });
+                            }
+                        }
+                        foreach (var dish in json_dish.getDishList())
+                        {
+
+                            if (!dish.Spotlighted)
+                            {
+                                if (dish.Categories.ToArray().Intersect(client_variable.dish_catagory.ToArray()).Any() || client_variable.dish_catagory.Count == 0)
+                                    list.Add(new option
+                                    {
+                                        printToConsole = dish.Title,
+                                        func = dishitem(dish)
+                                    });
+                            }
+                        }
+                        list.Add(new option
+                        {
+                            printToConsole = "Overview",
+                            func = Overview(food)
+                        });
+                        list.Add(new option
+                        {
+                            printToConsole = "Finish your Take-Away!",
+                            func = takeaway2(food)
+                        });
+                        list.Add(new option
+                        {
+                            printToConsole = "Return",
+                            func = new MenuHandler().userMain
+                        });
+
+                        Menu men = new Menu()
+                        {
+                            options = list.ToArray(),
+                            prefix = "Menu"
+                        };
+                        men.RunMenu();
+
+
+                    }
+                    foods();
                 }
-                void foods()
-                {
-
-                    var list = new List<option>();
-
-                    list.Add(new option
-                    {
-                        printToConsole = "Filters",
-                        func = cat 
-                    });
-                    Action dishitem(Dish d)
-                    {
-                        void func()
-                        {
-                            food.Add(d);
-                            Console.WriteLine($"{d.Title} added to takeaway!\nPress Enter to Continue...");
-                            Console.ReadKey();
-                            foods();
-
-                        }
-                        return func;
-                    }
-
-
-                    foreach (var dish in json_dish.getDishList())
-                    {
-                        if (dish.Spotlighted)
-                        {
-                            if (dish.Categories.ToArray().Intersect(client_variable.dish_catagory.ToArray()).Any() || client_variable.dish_catagory.Count == 0)
-                                list.Add(new option
-                                {
-                                    printToConsole = "-=- " + dish.Title + " -=-",
-                                    func = dishitem(dish)
-                                });
-                        }
-                    }
-                    foreach (var dish in json_dish.getDishList())
-                    {
-
-                        if (!dish.Spotlighted)
-                        {
-                            if (dish.Categories.ToArray().Intersect(client_variable.dish_catagory.ToArray()).Any() || client_variable.dish_catagory.Count == 0)
-                                list.Add(new option
-                                {
-                                    printToConsole = dish.Title,
-                                    func = dishitem(dish)
-                                });
-                        }
-                    }
-                    list.Add(new option
-                    {
-                        printToConsole = "Finish your Take-Away!",
-                        func = takeaway2(food)
-                    });
-                    list.Add(new option
-                    {
-                        printToConsole = "Return",
-                        func = new MenuHandler().userMain
-                    });
-
-                    Menu men = new Menu()
-                    {
-                        options = list.ToArray(),
-                        prefix = "Menu"
-                    };
-                    men.RunMenu();
-
-
-                }
-                foods();
+                return func;
             }
+           
+            protected Action Overview(List<Dish> food)
+            {
+                void func()
+                {
+                    foreach(var d in food)
+                    {
+                        Console.WriteLine($"Dish: {d.Title}, Price: {d.Price}\n");
+                    }
+                    Console.WriteLine("Press enter to continue...");
+                    Console.ReadLine();
+                    takeaway(food)();
+                }
+                return func;
+            } 
             protected Action takeaway2(List<Dish> dishes)
             {
                 void f()
@@ -1764,7 +1789,7 @@ Change Creditcard  ");
                 options.Add(new option
                 {
                     printToConsole = "Take-Away",
-                    func = takeaway
+                    func = takeaway()
                 });
                 options.Add(new option
                 {
