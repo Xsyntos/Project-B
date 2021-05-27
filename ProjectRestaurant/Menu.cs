@@ -19,9 +19,10 @@ namespace ProjectRestaurant
  _____         _                       _   
 | __  |___ ___| |_ ___ _ _ ___ ___ ___| |_ 
 |    -| -_|_ -|  _| .'| | |  _| .'|   |  _|
-|__|__|___|___|_| |__,|___|_| |__,|_|_|_|  
-                                           
-{prefix}  ";
+|__|__|___|___|_| |__,|___|_| |__,|_|_|_|";
+            prompt += "\n+-------------------------------------------------------------+\n";
+            prompt += prefix;
+            prompt += "\n+-------------------------------------------------------------+";
             string[] optionText = new string[options.Length];
             for(int i = 0; i < options.Length; i++)
             {
@@ -30,8 +31,15 @@ namespace ProjectRestaurant
 
             Game mainMenu = new Game(prompt, optionText);
             int selectedIndex = mainMenu.Run();
-            
-            options[selectedIndex].func();
+
+            if (options[selectedIndex].func != null)
+            {
+                options[selectedIndex].func();
+            }
+            else
+            {
+                this.RunMenu();
+            }
         }
     }
 

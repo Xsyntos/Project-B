@@ -29,17 +29,15 @@ namespace ProjectRestaurant
                 List<reservation> data = new List<reservation>();
                 string jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<reservation>>(data);
                 File.WriteAllText(@"reservation.json", jsonString);
+                clearOldreservation();
             }
         }
 
-        public static void clearOldreservation()
+        private static void clearOldreservation()
         {
             var data = getReservationlist();
-            foreach (var i in data)
-            {
-                if ((i.date - DateTime.Now).Days < 0)
-                    removeReservation(i.Id);
-            }
+            data.RemoveAll(i => i.date < DateTime.Now);
+
             var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<reservation>>(data);
             File.WriteAllText(@"reservation.json", jsonString);
         }
@@ -67,7 +65,7 @@ namespace ProjectRestaurant
         }
 
         private static Random random = new Random();
-        public static string resKey(int length = 12)
+        private static string resKey(int length = 12)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             string x = new string(Enumerable.Repeat(chars, length)
@@ -84,27 +82,11 @@ namespace ProjectRestaurant
             }
             return x;
         }
-        public static List<reservation> getReservationlist()
+        private static List<reservation> getReservationlist()
         {
             string jsonString = File.ReadAllText(@"reservation.json");
             var data = JsonSerializer.Deserialize<System.Collections.Generic.List<reservation>>(jsonString);
             return data;
-        }
-
-        public static void displayReservation()
-        {
-            var data = getReservationlist();
-            foreach (var x in data)
-            {
-                Console.WriteLine($"ID: {x.Id}");
-                Console.WriteLine($"Date: {x.date}");
-                Console.WriteLine($"User: {x.user.Id}");
-                Console.WriteLine($"    Username: {x.user.username}");
-                Console.WriteLine($"Table: {x.table.Id}");
-                Console.WriteLine($"    Capacity: {x.table.capacity}");
-                Console.WriteLine("     VIP: {x.table.vip}");
-                Console.WriteLine("-------------------------------");
-            }
         }
 
         public static reservation[] reservationsofdate(DateTime date)
@@ -121,6 +103,45 @@ namespace ProjectRestaurant
             }
             return list.ToArray();
         }
+        //Verplaatsen!!!!
+        //Reservation List private
+        public static List<reservation> getUserReservations()
+        {
+            clearOldreservation();
+            var data = getReservationlist();
+            data.RemoveAll(i => (i.user.Id != client_variable.user.Id) || (i.user.username != client_variable.user.username));
+            return data;
+        }
 
+        public static reservation GetReservation(string id)
+        {
+            clearOldreservation();
+            var data = getReservationlist();
+            foreach(var i in data)
+            {
+                if(i.Id == id)
+                {
+                    return i;
+                }
+            }
+            return new reservation
+            {
+
+            };
+        }
+
+        public static bool doesReservationexist(string id)
+        {
+            clearOldreservation();
+            var data = getReservationlist();
+            foreach (var i in data)
+            {
+                if (i.Id == id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

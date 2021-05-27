@@ -10,12 +10,15 @@ namespace ProjectRestaurant
     [System.Serializable]
     public class user
     {
+        
 
         public int Id { get; set; }
         public string username { get; set; }
         public string password { get; set; }
         public string creditcard { get; set; }
         public string role { get; set; }
+        
+
     }
 
     class json_customer
@@ -38,9 +41,17 @@ namespace ProjectRestaurant
                 {
                     Id = 2,
                     username = "Chef",
-                    password = "chef",
+                    password = Hash.Encrypt("chef"),
                     creditcard = "-Chef-",
                     role = "chef"
+                });
+                data.Add(new user()
+                {
+                    Id = 3,
+                    username = "Cashier",
+                    password = Hash.Encrypt("cashier"),
+                    creditcard = "-Cashier-",
+                    role = "cashier"
                 });
                 string jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<user>>(data);
                 File.WriteAllText(@"users.json", jsonString);
@@ -81,12 +92,16 @@ namespace ProjectRestaurant
             File.WriteAllText(@"users.json", jsonString);
         }
 
-        public static void removeWithID(int i)
+        public static Action delete(user user)
         {
-            var data = getUserlist();
-            data.RemoveAll(u => u.Id == i);
-            var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<user>>(data);
-            File.WriteAllText(@"users.json", jsonString);
+            void tes()
+            {
+                var data = getUserlist();
+                data.RemoveAll(u => u.Id == user.Id);
+                var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<user>>(data);
+                File.WriteAllText(@"users.json", jsonString);
+            }
+            return tes;
         }
 
         public static List<user> getUserlist()
@@ -96,18 +111,7 @@ namespace ProjectRestaurant
             return data;
         }
 
-        public static void displayUsers()
-        {
-            var data = getUserlist();
-            foreach(var x in data)
-            {
-                Console.WriteLine($"Username: {x.username}") ;
-                Console.WriteLine($"ID: {x.Id}");
-                Console.WriteLine("-------------------------------");
-            }
-        }
-
-        public static user getUser(int id)
+        protected static user getUser(int id)
         {
             var data = getUserlist();
             for(int i = 0; i < data.Count; i++)
@@ -120,6 +124,46 @@ namespace ProjectRestaurant
             }
             return new user();
         }
-
+        public static void displayAllUsers()
+        {
+            var data = getUserlist();
+            foreach (var x in data)
+            {
+                Console.WriteLine($"User ID: {x.Id}");
+                Console.WriteLine($"User Name: {x.username}");
+                Console.WriteLine($"User Password: {x.password}");
+                Console.WriteLine($"User Role: {x.role}");
+                Console.WriteLine("-------------------------------");
+            }
+            Console.WriteLine("\nPress enter to continue...");
+            Console.ReadLine();
+        }
+        public static Action Update(user user, string role)
+        {
+            void f()
+            {
+                var data = getUserlist();
+                foreach (var i in data)
+                {
+                    if (i.Id == user.Id)
+                    {
+                        i.role = role;
+                        Console.WriteLine("\nRole has been changed. Press enter to continue...");
+                        Console.ReadLine();
+                    }
+                }
+                var jsonString = JsonSerializer.Serialize(data);
+                File.WriteAllText(@"users.json", jsonString);
+            }
+            return f;
+        }
+        public static void updateUserFromClient()
+        {
+            var data = getUserlist();
+            data.RemoveAll(u => u.Id == client_variable.user.Id);
+            data.Add(client_variable.user);
+            var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<user>>(data);
+            File.WriteAllText(@"users.json", jsonString);
+        }
     }
 }

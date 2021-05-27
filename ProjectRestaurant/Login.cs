@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Text.Json;
 
 namespace ProjectRestaurant
-{
+{ 
 
     class login
 
@@ -11,40 +13,48 @@ namespace ProjectRestaurant
         public static void Login()
         {
             // login
+            Console.Clear();
+            Console.WriteLine(@$"
 
+                                           
+ _____         _                       _   
+| __  |___ ___| |_ ___ _ _ ___ ___ ___| |_ 
+|    -| -_|_ -|  _| .'| | |  _| .'|   |  _|
+|__|__|___|___|_| |__,|___|_| |__,|_|_|_|  
+                                           
+Login  ");
             int login = 0;
 
-            Console.WriteLine("Please enter your username: ");
-            string username = Console.ReadLine();
-            Console.WriteLine("Please enter your password: ");
-            string password = Console.ReadLine();
 
+            string username;
+            string password;
 
             var users = json_customer.getUserlist();
-            foreach(var x in users)
+
+
+            while (login == 0)
             {
-                if(username == x.username && Hash.Encrypt(password) == x.password)
+                Console.WriteLine("Please enter your username: ");
+                username = Console.ReadLine();
+                Console.WriteLine("Please enter your password: ");
+                password = Console.ReadLine();
+                foreach (var x in users)
                 {
-                    Console.WriteLine("Log in successful!");
-                    login += 1;
-                    client_variable.user = x;
-                    if (x.role == "customer")
+                    if (username == x.username && Hash.Encrypt(password) == x.password)
                     {
-                        menuReg.mainCustomermenu();
-                    }
-                    if (x.role == "admin")
-                    {
-                        menuReg.mainAdminmenu();
-                    }
+                        Console.WriteLine("Log in successful!");
+                        login += 1;
+                        client_variable.user = x;
+                        new MenuHandler().userMain();
 
+                    }
                 }
-            }
-
-            if(login <= 0)
-            {
                 Console.WriteLine("Error");
-            }
+                Console.ReadKey();
+                new MenuHandler().mainMenu();
 
+
+            }
         }
     }
 }
