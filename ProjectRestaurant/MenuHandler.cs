@@ -317,58 +317,49 @@ Change Creditcard  ");
         {
             public override void Main()
             {
-                var x = new option[]
-                {
-               new option
+               var x = new option[]
                {
-                   printToConsole = "Check all reservations",
-               },
-               new option
+                   new option
+                   {
+                       printToConsole = "Check all reservations",
+                   },
+                   new option
+                   {
+                       printToConsole = "View all Dishes",
+                       func = displayAllDishes
+                   },
+                   new option
+                   {
+                       printToConsole = "Update Dishes",
+                       func = getAllDishes
+                   },
+                   new option
+                   {
+                       printToConsole = "Edit Users",
+                       func = editUserMenu
+                   },
+                   new option
+                   {
+                       printToConsole = "Edit tables",
+                       func = capacity
+                   },
+                   new option
+                   {
+                       printToConsole = "Change Account settings",
+                       func = accountSettings
+                   },
+                   new option
+                   {
+                       printToConsole = "Log-out",
+                       func = mainMenu
+                   }
+               };
+               var menu = new Menu
                {
-                   printToConsole = "Menu"
-                
-               },
-               new option
-               {
-                   printToConsole = "View all Dishes",
-                   func = displayAllDishes
-               },
-               new option
-               {
-                   printToConsole = "Change prices",
-                   func = getAllDishes
-                   
-               },
-               new option
-               {
-                   printToConsole = "Edit Users",
-                   func = editUserMenu
-               },
-                new option
-               {
-                   printToConsole = "Edit tables",
-                   func = capacity
-               },
-               new option
-               {
-                   printToConsole = "Change Account settings",
-                   func = accountSettings
-               },
-               new option
-               {
-                   printToConsole = "Log-out",
-                   func = mainMenu
-               }
-
-
-                };
-                var menu = new Menu
-                {
-                    prefix = "Welcome Boss",
-                    options = x
-                };
-                menu.RunMenu();
-
+                   prefix = "Welcome Boss",
+                   options = x
+               };
+               menu.RunMenu();
             }
             private void capacity()
             {
@@ -828,6 +819,14 @@ Change Creditcard  ");
                         printToConsole = "Stock",
                         func = updateDish(dish, 6)
                     });
+                    if (client_variable.user.role == "admin")
+                    {
+                        option.Add(new option()
+                        {
+                            printToConsole = "Change Date",
+                            func = changeDateSettings(dish)
+                        });
+                    }
                     option.Add(new option()
                     {
                         printToConsole = "Return",
@@ -842,7 +841,67 @@ Change Creditcard  ");
                     menu.RunMenu();
                 }
                 return tes;
-            } 
+            }
+
+            protected Action changeDateSettings(Dish dish)
+            {
+                void func() 
+                { 
+                    var option = new List<option>();
+                    option.Add(new option()
+                    {
+                        printToConsole = "Set Start Date",
+                        // func = setStartDate(dish)
+                    });
+                    option.Add(new option()
+                    {
+                        printToConsole = "Set End Date",
+                        // func = setEndDate(dish)
+                    });
+                    option.Add(new option()
+                    {
+                        printToConsole = "Return",
+                        func = listSettingsDish(dish)
+                    });
+                    Menu menu = new Menu
+                    {
+                        options = option.ToArray(),
+                        prefix = "Select an option"
+                    };
+                    menu.RunMenu();
+                }
+                return func;
+            }
+            // TODO
+            // setDate() moet veranderen van self-input naar een date option menu.
+            private DateTime setDate()
+            {
+                Console.WriteLine("What should be the Date? Format is 24/12/2020");
+                string iDate = Console.ReadLine();
+                DateTime oDate = Convert.ToDateTime(iDate);
+                return oDate;
+            }
+            protected Action setStartDate(Dish dish)
+            {
+                void func()
+                {
+                    DateTime date = setDate();
+                    json_dish.SetStartDate(dish, date);
+                    listSettingsDish(dish);
+                }
+                return func;
+            }
+            protected Action setEndDate(Dish dish)
+            {
+                void func()
+                {
+                    DateTime date = setDate();
+                    json_dish.SetStartDate(dish, date);
+                    listSettingsDish(dish);
+                }
+                return func;
+            }
+            
             protected Action updateDish(Dish dish, int num)
             {
                 void tes()
