@@ -1626,7 +1626,8 @@ Change Creditcard  ");
             }
            
             protected Action Overview(List<Dish> food)
-            {
+            {   
+                /*
                 void func()
                 {
                     foreach(var d in food)
@@ -1637,7 +1638,35 @@ Change Creditcard  ");
                     Console.ReadLine();
                     takeaway(food)();
                 }
-                return func;
+                */
+                void func2()
+                {
+                    var data = food;
+                    var x = new option[food.Count + 1];
+                    for (int i = 0; i < food.Count; i++)
+                    {
+                        x[i] = new option
+                        {
+                            printToConsole = $"{food[i].Title}",
+                            // TODO
+                            // variable data is eigenlijk het mandje van je takeaway en als je op een item klikt, redirect je gewoon naar een delete function met de food[i].Title als paramater.
+                            // Check getAllDishes van Chef naar de func als reference.
+                            // Wel belangrijk, je nadat je delete hebt, moet je weer food list als param in de takeaway zetten.
+                        };
+                    }
+                    x[x.Length - 1] = new option
+                    {
+                        printToConsole = "Return",
+                        func = takeaway(food)
+                    };
+                    var menu = new Menu
+                    {
+                        prefix = $"Welcome {client_variable.user.role}",
+                        options = x
+                    };
+                    menu.RunMenu();
+                }
+                return func2;
             } 
             protected Action takeaway2(List<Dish> dishes)
             {
