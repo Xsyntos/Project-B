@@ -213,5 +213,31 @@ namespace ProjectRestaurant
             }
             return new Dish();
         }
+        public static void SetStartDate(Dish dish, DateTime date)
+        {
+            var data = getDishList();
+            foreach (var i in data)
+            {
+                if (i.UID == dish.UID)
+                {
+                    i.startDate = date;
+                }
+            }
+            var jsonString = JsonSerializer.Serialize(data);
+            File.WriteAllText(@"dish.json", jsonString);
+        }
+        public static void SetEndDate(Dish dish, DateTime date)
+        {
+            var data = getDishList();
+            foreach (var i in data)
+            {
+                if (i.UID == dish.UID)
+                {
+                    i.startDate = date;
+                }
+            }
+            var jsonString = JsonSerializer.Serialize(data);
+            File.WriteAllText(@"dish.json", jsonString);
+        }
     }
 }

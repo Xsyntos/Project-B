@@ -13,7 +13,8 @@ namespace ProjectRestaurant
         public bool Spotlighted { set ; get; }
         public List<string> Categories{ set; get; }
         public int Stock { set; get; }
-
+        public DateTime startDate { set; get; }
+        public DateTime endDate { set; get; }
 
 
         public void ChangePrice(double amount)
