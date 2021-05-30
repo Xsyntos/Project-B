@@ -10,10 +10,12 @@ namespace ProjectRestaurant
         {
         json_reservation.reservationInit();
         json_customer.customerinit();
+        json_dish.dishInit();
         json_table.tableInit();
+        json_takeaway.takeawayInit();
+        client_variable.dish_catagory = new System.Collections.Generic.List<string>(); 
 
-        json_reservation.clearOldreservation();
-        menuReg.mainMenu();
+        new MenuHandler().mainMenu();
 
         }
 

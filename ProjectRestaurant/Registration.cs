@@ -39,11 +39,12 @@ Registration  ");
                 {
                     json_customer.newUser(username, Hash.Encrypt(Password), "123");
                     Console.WriteLine("Successfully registered");
-                    menuReg.mainMenu();
+                    new MenuHandler().mainMenu();
                 }
                 else
                 {
                     Console.WriteLine("Pasword or Username are incorrect, Please try again");
+                    RegistrationFirstVersion();
                 }
 
             }

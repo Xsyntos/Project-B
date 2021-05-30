@@ -12,10 +12,9 @@ namespace ProjectRestaurant
 
         public int Id { get; set; }
         // string foodname will probably change into a list later on the project.
-        public string foodname { get; set; }
-        public string user { get; set; }
-        public string time { get; set; }
-        public string creditcardnumber { get; set; }
+        public int[] foodname { get; set; }
+        public user user { get; set; }
+        public DateTime time { get; set; }
 
     }
     class json_takeaway
@@ -30,10 +29,9 @@ namespace ProjectRestaurant
                     data.Add(new takeaway()
                     {
                         Id = i,
-                        foodname = $"Fake foodname number: {i}",
-                        user = $"Fake name number: {i}",
-                        time = $"{i}{i}:{i}{i}",
-                        creditcardnumber = Hash.Encrypt("01234567891234"),
+                        foodname = new int[3],
+                        user =  new user(),
+                        time = DateTime.Now
 
                     });
                 }
@@ -41,7 +39,7 @@ namespace ProjectRestaurant
                 File.WriteAllText(@"takeaway.json", jsonString);
             }
         }
-        public static void addtakeaway(string foodname, string user, string time, string creditcardnumber)
+        public static void addtakeaway(int[] foodname, user user, DateTime time)
         {
             var data = gettakeawayList();
             data.Add(new takeaway()
@@ -50,7 +48,6 @@ namespace ProjectRestaurant
                 foodname = foodname,
                 user = user,
                 time = time,
-                creditcardnumber = Hash.Encrypt(creditcardnumber)
 
             }); ;
             var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<takeaway>>(data);
@@ -70,19 +67,7 @@ namespace ProjectRestaurant
             var data = JsonSerializer.Deserialize<System.Collections.Generic.List<takeaway>>(jsonString);
             return data;
         }
-        public static void displaytakeaway()
-        {
-            var data = gettakeawayList();
-            foreach (var x in data)
-            {
-                Console.WriteLine($"ID: {x.Id}");
-                Console.WriteLine($"foodname: {x.foodname}"); // list comprehension for food for later when it will get changed.
-                Console.WriteLine($"User: {x.user}");
-                Console.WriteLine($"Time: {x.time}");
-                Console.WriteLine($"Creditcardnumber: {Hash.Encrypt(x.creditcardnumber)}");
-                Console.WriteLine("-------------------------------");
-            }
-        }
+       
         public static takeaway gettakeawayFromId(int id)
         {
             var data = gettakeawayList();

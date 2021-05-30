@@ -77,6 +77,36 @@ namespace ProjectRestaurant
             var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<table>>(data);
             File.WriteAllText(@"table.json", jsonString);
         }
+        public static void removeTable(table t)
+        {
+            removeTable(t.Id);
+        }
+        public static void changeVIP(int id)
+        {
+            var data = getTableList();
+            foreach(var i in data)
+            {
+                if (i.Id == id)
+                {
+                    i.vip = !i.vip;
+                }
+            }
+            var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<table>>(data);
+            File.WriteAllText(@"table.json", jsonString);
+        }
+        public static void changeCap(int id, int newCap) 
+        {
+            var data = getTableList();
+            foreach (var i in data)
+            {
+                if (i.Id == id)
+                {
+                    i.capacity = newCap;
+                }
+            }
+            var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<table>>(data);
+            File.WriteAllText(@"table.json", jsonString);
+        }
 
         public static List<table> getTableList()
         {
@@ -84,17 +114,7 @@ namespace ProjectRestaurant
             var data = JsonSerializer.Deserialize<System.Collections.Generic.List<table>>(jsonString);
             return data;
         }
-        public static void displayTable()
-        {
-            var data = getTableList();
-            foreach (var x in data)
-            {
-                Console.WriteLine($"ID: {x.Id}");
-                Console.WriteLine($"Capacity: {x.capacity}");
-                Console.WriteLine($"VIP: {x.vip}");
-                Console.WriteLine("-------------------------------");
-            }
-        }
+
         public static table[] getFreeTable(DateTime date)
         {
          //   var list = new List<table>();

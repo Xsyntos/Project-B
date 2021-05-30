@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Text.Json;
 
 namespace ProjectRestaurant
-{
+{ 
 
     class login
 
@@ -28,8 +30,8 @@ Login  ");
             string password;
 
             var users = json_customer.getUserlist();
-            
-            
+
+
             while (login == 0)
             {
                 Console.WriteLine("Please enter your username: ");
@@ -43,24 +45,20 @@ Login  ");
                         Console.WriteLine("Log in successful!");
                         login += 1;
                         client_variable.user = x;
-                        if (x.role == "customer")
-                        {
-                            menuReg.mainCustomermenu();
-                        }
-                        if (x.role == "cashier")
-                        {
-                            menuReg.mainCashiermenu();
-                        }
-                        if (x.role == "admin")
-                        {
-                            menuReg.mainAdminmenu();
-                        }
-
+                        new MenuHandler().userMain();
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nWrong credentials. Press Enter to continue...");
+                        Console.ReadKey();
+                        new MenuHandler().mainMenu();
                     }
                 }
                 Console.WriteLine("Error");
                 Console.ReadKey();
-                menuReg.mainMenu();
+                new MenuHandler().mainMenu();
+
+
             }
         }
     }
