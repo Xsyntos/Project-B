@@ -195,6 +195,8 @@ namespace ProjectRestaurant
                 Console.WriteLine($"This dish is currently{(x.Spotlighted ? "" : " not")} Spotlighted");
                 Console.WriteLine($"Categories: {x.ShowAllCat()}");
                 Console.WriteLine($"Stock: {x.Stock}");
+                Console.WriteLine($"StartDate: {x.startDate}");
+                Console.WriteLine($"EndDate: {x.endDate}");
                 Console.WriteLine("-------------------------------");
             }
             Console.WriteLine("\nPress enter to continue...");
