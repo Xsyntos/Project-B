@@ -851,12 +851,12 @@ Change Creditcard  ");
                     option.Add(new option()
                     {
                         printToConsole = "Set Start Date",
-                        // func = setStartDate(dish)
+                        func = setStartDate(dish)
                     });
                     option.Add(new option()
                     {
                         printToConsole = "Set End Date",
-                        // func = setEndDate(dish)
+                        func = setEndDate(dish)
                     });
                     option.Add(new option()
                     {
@@ -876,7 +876,7 @@ Change Creditcard  ");
             // setDate() moet veranderen van self-input naar een date option menu.
             private DateTime setDate()
             {
-                Console.WriteLine("What should be the Date? Format is 24/12/2020");
+                Console.WriteLine("What should be the Date? To cancel, press 'q'. Format is DD/MM/YYYY");
                 string iDate = Console.ReadLine();
                 DateTime oDate = Convert.ToDateTime(iDate);
                 return oDate;
@@ -885,9 +885,19 @@ Change Creditcard  ");
             {
                 void func()
                 {
-                    DateTime date = setDate();
-                    json_dish.SetStartDate(dish, date);
-                    listSettingsDish(dish);
+                    try
+                    {
+                        DateTime date = setDate();
+                        json_dish.SetStartDate(dish, date);
+                        Console.WriteLine("Start Date has been set! Press Enter to continue...");
+                        Console.ReadKey();
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Press Enter to continue...");
+                        Console.ReadKey();
+                    }
+                    listSettingsDish(json_dish.getDish(dish.UID))();
                 }
                 return func;
             }
@@ -895,9 +905,19 @@ Change Creditcard  ");
             {
                 void func()
                 {
-                    DateTime date = setDate();
-                    json_dish.SetStartDate(dish, date);
-                    listSettingsDish(dish);
+                    try
+                    {
+                        DateTime date = setDate();
+                        json_dish.SetEndDate(dish, date);
+                        Console.WriteLine("End Date has been set! Press Enter to continue...");
+                        Console.ReadKey();
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Press Enter to continue...");
+                        Console.ReadKey();
+                    }
+                    listSettingsDish(json_dish.getDish(dish.UID))();
                 }
                 return func;
             }
