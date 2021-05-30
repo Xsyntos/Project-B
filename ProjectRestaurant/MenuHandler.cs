@@ -818,7 +818,7 @@ Change Creditcard  ");
                     {
                         printToConsole = "Stock",
                         func = updateDish(dish, 6)
-                    });
+                    }); 
                     if (client_variable.user.role == "admin")
                     {
                         option.Add(new option()
@@ -921,7 +921,7 @@ Change Creditcard  ");
                 }
                 return func;
             }
-            
+
             protected Action updateDish(Dish dish, int num)
             {
                 void tes()
@@ -1731,6 +1731,8 @@ Change Creditcard  ");
                             // variable data is eigenlijk het mandje van je takeaway en als je op een item klikt, redirect je gewoon naar een delete function met de food[i].Title als paramater.
                             // Check getAllDishes van Chef naar de func als reference.
                             // Wel belangrijk, je nadat je delete hebt, moet je weer food list als param in de takeaway zetten.
+                            func = DeleteItemBasket(food[i], data)
+
                         };
                     }
                     x[x.Length - 1] = new option
@@ -1746,7 +1748,18 @@ Change Creditcard  ");
                     menu.RunMenu();
                 }
                 return func2;
-            } 
+            }
+          
+            private Action DeleteItemBasket(Dish dish, List<Dish> data)
+            {
+                void f()
+                {
+                    data.RemoveAll(i => i.Title == dish.Title);
+                    Overview(data)();
+                }
+                return f;
+            }
+
             protected Action takeaway2(List<Dish> dishes)
             {
                 void f()
