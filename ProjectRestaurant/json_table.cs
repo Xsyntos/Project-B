@@ -70,7 +70,7 @@ namespace ProjectRestaurant
             var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<table>>(data);
             File.WriteAllText(@"table.json", jsonString);
         }
-        public static void removeTable(int id)
+        private static void removeTable(int id)
         {
             var data = getTableList();
             data.RemoveAll(i => i.Id == id);

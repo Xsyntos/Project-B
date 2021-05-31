@@ -10,18 +10,14 @@ namespace ProjectRestaurant
     [System.Serializable]
     public class user
     {
-        
-
         public int Id { get; set; }
         public string username { get; set; }
         public string password { get; set; }
         public string creditcard { get; set; }
         public string role { get; set; }
-        
-
     }
 
-    class json_customer
+    class json_customer 
     {
         public static void customerinit()
         {
@@ -72,25 +68,6 @@ namespace ProjectRestaurant
             var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<user>>(data);
             File.WriteAllText(@"users.json", jsonString);
         }
-       
-        public static void removeWithName(string name)
-        {
-            var data = getUserlist();
-            int index = -1;
-            var i = 0;
-            while (i < data.Count)
-            {
-                if (data[i].username == name)
-                {
-                    index = i;
-                    i = data.Count;
-                    data.RemoveAt(index);
-                }
-                i++;
-            }
-            var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<user>>(data);
-            File.WriteAllText(@"users.json", jsonString);
-        }
 
         public static Action delete(user user)
         {
@@ -131,7 +108,6 @@ namespace ProjectRestaurant
             {
                 Console.WriteLine($"User ID: {x.Id}");
                 Console.WriteLine($"User Name: {x.username}");
-                Console.WriteLine($"User Password: {x.password}");
                 Console.WriteLine($"User Role: {x.role}");
                 Console.WriteLine("-------------------------------");
             }

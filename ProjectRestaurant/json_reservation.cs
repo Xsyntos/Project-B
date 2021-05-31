@@ -11,7 +11,6 @@ namespace ProjectRestaurant
     [System.Serializable]
     public class reservation
     {
-
         public string Id { get; set; }
         public DateTime date { get; set; }
         public user user { get; set; }
@@ -103,8 +102,7 @@ namespace ProjectRestaurant
             }
             return list.ToArray();
         }
-        //Verplaatsen!!!!
-        //Reservation List private
+
         public static List<reservation> getUserReservations()
         {
             clearOldreservation();
@@ -124,10 +122,7 @@ namespace ProjectRestaurant
                     return i;
                 }
             }
-            return new reservation
-            {
-
-            };
+            return new reservation();
         }
 
         public static bool doesReservationexist(string id)

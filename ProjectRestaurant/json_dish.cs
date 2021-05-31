@@ -151,8 +151,6 @@ namespace ProjectRestaurant
             return f;
         }
 
-
-
         public static Action addDish(Dish dish)
         {
             void tes()
@@ -165,11 +163,11 @@ namespace ProjectRestaurant
             }
             return tes;
         }
+
         public static Action removeDish(int id)
         {
             void tes()
             {
-
                 var data = getDishList();
                 data.RemoveAll(i => i.UID == id);
                 var jsonString = JsonSerializer.Serialize(data);
