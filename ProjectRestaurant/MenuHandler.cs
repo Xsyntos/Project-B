@@ -1706,18 +1706,6 @@ Change Creditcard  ");
            
             protected Action Overview(List<Dish> food)
             {   
-                /*
-                void func()
-                {
-                    foreach(var d in food)
-                    {
-                        Console.WriteLine($"Dish: {d.Title}, Price: {d.Price}\n");
-                    }
-                    Console.WriteLine("Press enter to continue...");
-                    Console.ReadLine();
-                    takeaway(food)();
-                }
-                */
                 void func2()
                 {
                     var data = food;
@@ -1727,12 +1715,7 @@ Change Creditcard  ");
                         x[i] = new option
                         {
                             printToConsole = $"{food[i].Title}",
-                            // TODO
-                            // variable data is eigenlijk het mandje van je takeaway en als je op een item klikt, redirect je gewoon naar een delete function met de food[i].Title als paramater.
-                            // Check getAllDishes van Chef naar de func als reference.
-                            // Wel belangrijk, je nadat je delete hebt, moet je weer food list als param in de takeaway zetten.
                             func = DeleteItemBasket(food[i], data)
-
                         };
                     }
                     x[x.Length - 1] = new option

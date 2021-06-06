@@ -22,8 +22,6 @@ Registration  ");
             /// Input Username
             Console.WriteLine("Insert Username: ");
             var username = Console.ReadLine();
-
-
             {
 
                 /// Input Pasword 
