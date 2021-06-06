@@ -21,10 +21,5 @@ namespace ProjectRestaurant
             }
             return hashString;
         }
-
-        public string Decrypt()
-        {
-            return "";
-        }
     }
 }

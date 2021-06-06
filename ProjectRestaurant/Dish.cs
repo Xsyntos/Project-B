@@ -13,21 +13,9 @@ namespace ProjectRestaurant
         public bool Spotlighted { set ; get; }
         public List<string> Categories{ set; get; }
         public int Stock { set; get; }
+        public DateTime startDate { set; get; }
+        public DateTime endDate { set; get; }
 
-
-
-        public void ChangePrice(double amount)
-        {
-            Price = (float)amount;
-        }
-        public void SpotlightTrue()
-        {
-            Spotlighted = true;
-        }
-        public void SpotlightFalse()
-        {
-            Spotlighted = false;
-        }
         public string ShowAllCat()
         {
             int num = 1;

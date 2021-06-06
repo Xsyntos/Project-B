@@ -8,6 +8,8 @@ namespace ProjectRestaurant
     {
         static void Main(string[] args)
         {
+        //Main initilization!
+        //If the databases dont exist there will be one created!
         json_reservation.reservationInit();
         json_customer.customerinit();
         json_dish.dishInit();
@@ -15,6 +17,7 @@ namespace ProjectRestaurant
         json_takeaway.takeawayInit();
         client_variable.dish_catagory = new System.Collections.Generic.List<string>(); 
 
+        //Lets start the front end of the program!
         new MenuHandler().mainMenu();
 
         }

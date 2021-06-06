@@ -151,8 +151,6 @@ namespace ProjectRestaurant
             return f;
         }
 
-
-
         public static Action addDish(Dish dish)
         {
             void tes()
@@ -165,11 +163,11 @@ namespace ProjectRestaurant
             }
             return tes;
         }
+
         public static Action removeDish(int id)
         {
             void tes()
             {
-
                 var data = getDishList();
                 data.RemoveAll(i => i.UID == id);
                 var jsonString = JsonSerializer.Serialize(data);
@@ -195,6 +193,8 @@ namespace ProjectRestaurant
                 Console.WriteLine($"This dish is currently{(x.Spotlighted ? "" : " not")} Spotlighted");
                 Console.WriteLine($"Categories: {x.ShowAllCat()}");
                 Console.WriteLine($"Stock: {x.Stock}");
+                Console.WriteLine($"StartDate: {x.startDate}");
+                Console.WriteLine($"EndDate: {x.endDate}");
                 Console.WriteLine("-------------------------------");
             }
             Console.WriteLine("\nPress enter to continue...");
@@ -212,6 +212,32 @@ namespace ProjectRestaurant
 
             }
             return new Dish();
+        }
+        public static void SetStartDate(Dish dish, DateTime date)
+        {
+            var data = getDishList();
+            foreach (var i in data)
+            {
+                if (i.UID == dish.UID)
+                {
+                    i.startDate = date;
+                }
+            }
+            var jsonString = JsonSerializer.Serialize(data);
+            File.WriteAllText(@"dish.json", jsonString);
+        }
+        public static void SetEndDate(Dish dish, DateTime date)
+        {
+            var data = getDishList();
+            foreach (var i in data)
+            {
+                if (i.UID == dish.UID)
+                {
+                    i.startDate = date;
+                }
+            }
+            var jsonString = JsonSerializer.Serialize(data);
+            File.WriteAllText(@"dish.json", jsonString);
         }
     }
 }

@@ -11,7 +11,6 @@ namespace ProjectRestaurant
     {
 
         public int Id { get; set; }
-        // string foodname will probably change into a list later on the project.
         public int[] foodname { get; set; }
         public user user { get; set; }
         public DateTime time { get; set; }
@@ -53,32 +52,12 @@ namespace ProjectRestaurant
             var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<takeaway>>(data);
             File.WriteAllText(@"takeaway.json", jsonString);
         }
-        public static void removetakeaway(int id)
-        {
-            var data = gettakeawayList();
-            data.RemoveAll(i => i.Id == id);
-            var jsonString = JsonSerializer.Serialize<System.Collections.Generic.List<takeaway>>(data);
-            File.WriteAllText(@"takeaway.json", jsonString);
-        }
 
-        public static List<takeaway> gettakeawayList()
+        private static List<takeaway> gettakeawayList()
         {
             string jsonString = File.ReadAllText(@"takeaway.json");
             var data = JsonSerializer.Deserialize<System.Collections.Generic.List<takeaway>>(jsonString);
             return data;
-        }
-       
-        public static takeaway gettakeawayFromId(int id)
-        {
-            var data = gettakeawayList();
-            foreach (var i in data)
-            {
-                if (i.Id == id)
-                {
-                    return i;
-                }
-            }
-            return new takeaway();
         }
     }
 }

@@ -46,10 +46,11 @@ Login  ");
                         login += 1;
                         client_variable.user = x;
                         new MenuHandler().userMain();
-
                     }
+                    
+
                 }
-                Console.WriteLine("Error");
+                Console.WriteLine("Wrong credentials. Press Enter to continue...");
                 Console.ReadKey();
                 new MenuHandler().mainMenu();
 
