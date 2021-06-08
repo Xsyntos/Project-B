@@ -575,14 +575,17 @@ Change Creditcard  ");
             }
             private void getUsersUpdate()
             {
-                var x = new option[json_customer.getUserlist().Count + 1];
-                for (int i = 0; i < json_customer.getUserlist().Count; i++)
+                var x = new option[json_customer.getUserlist().Count];
+                for (int i = 0, j = 0; i < json_customer.getUserlist().Count; i++)
                 {
-                    x[i] = new option
+                    if (json_customer.getUserlist()[i].role != "admin")
                     {
-                        printToConsole = $"{json_customer.getUserlist()[i].username}",
-                        func = roleOptions(json_customer.getUserlist()[i])
-                    };
+                        x[j++] = new option
+                        {
+                            printToConsole = $"{json_customer.getUserlist()[i].username}",
+                            func = roleOptions(json_customer.getUserlist()[i])
+                        };
+                    }
                 }
                 x[x.Length - 1] = new option
                 {
@@ -599,17 +602,17 @@ Change Creditcard  ");
             }
             private void getUsersDelete()
             {
-                var x = new option[json_customer.getUserlist().Count + 1];
-                for (int i = 0; i < json_customer.getUserlist().Count; i++)
+                var x = new option[json_customer.getUserlist().Count];
+                for (int i = 0, j = 0; i < json_customer.getUserlist().Count; i++)
                 {
-                    //if (json_customer.getUserlist()[i].role != "admin")
-                    //{
-                        x[i] = new option
+                    if (json_customer.getUserlist()[i].role != "admin")
+                    {
+                        x[j++] = new option
                         {
                             printToConsole = $"{json_customer.getUserlist()[i].username}",
                             func = Delete(json_customer.getUserlist()[i])
                         };
-                    //}
+                    }
                 }
                 x[x.Length - 1] = new option
                 {
