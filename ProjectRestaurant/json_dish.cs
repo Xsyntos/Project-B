@@ -23,7 +23,36 @@ namespace ProjectRestaurant
                     Categories = new List<string>(),
                     Stock = 1
                 });
-
+                data.Add(new Dish()
+                {
+                    UID = 2,
+                    Title = "Crab schotel",
+                    Price = (float)8.50,
+                    Description = "Gemaakt van crabs, be careful!",
+                    Spotlighted = false,
+                    Categories = new List<string>(),
+                    Stock = 1
+                });
+                data.Add(new Dish()
+                {
+                    UID = 3,
+                    Title = "Sis kebap",
+                    Price = (float)11.00,
+                    Description = "Gemaakt van vlees.",
+                    Spotlighted = false,
+                    Categories = new List<string>(),
+                    Stock = 1
+                });
+                data.Add(new Dish()
+                {
+                    UID = 4,
+                    Title = "Kiptandori",
+                    Price = (float)7.50,
+                    Description = "Indian dish made in Indian.",
+                    Spotlighted = false,
+                    Categories = new List<string>(),
+                    Stock = 1
+                });
                 string jsonString = JsonSerializer.Serialize(data);
                 File.WriteAllText(@"dish.json", jsonString);
             }
