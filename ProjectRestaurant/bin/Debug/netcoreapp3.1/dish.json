@@ -1,1 +1,1 @@
-[{"UID":1,"Title":"Linzen Soep","Price":5.5,"Description":"Deze soep is gemaakt van linzen.","Spotlighted":true,"Categories":[],"Stock":0},{"UID":2,"Title":"Test","Price":5,"Description":"testen moet je doen","Spotlighted":false,"Categories":[],"Stock":0}]
+[{"UID":1,"Title":"Linzen Soep","Price":5.5,"Description":"Deze soep is gemaakt van linzen.","Spotlighted":false,"Categories":["childrenfood"],"Stock":0,"startDate":"0001-01-01T00:00:00","endDate":"0001-01-01T00:00:00"}]

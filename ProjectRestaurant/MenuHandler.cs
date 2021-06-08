@@ -575,14 +575,17 @@ Change Creditcard  ");
             }
             private void getUsersUpdate()
             {
-                var x = new option[json_customer.getUserlist().Count + 1];
-                for (int i = 0; i < json_customer.getUserlist().Count; i++)
+                var x = new option[json_customer.getUserlist().Count];
+                for (int i = 0, j = 0; i < json_customer.getUserlist().Count; i++)
                 {
-                    x[i] = new option
+                    if (json_customer.getUserlist()[i].role != "admin")
                     {
-                        printToConsole = $"{json_customer.getUserlist()[i].username}",
-                        func = roleOptions(json_customer.getUserlist()[i])
-                    };
+                        x[j++] = new option
+                        {
+                            printToConsole = $"{json_customer.getUserlist()[i].username}",
+                            func = roleOptions(json_customer.getUserlist()[i])
+                        };
+                    }
                 }
                 x[x.Length - 1] = new option
                 {
@@ -599,17 +602,17 @@ Change Creditcard  ");
             }
             private void getUsersDelete()
             {
-                var x = new option[json_customer.getUserlist().Count + 1];
-                for (int i = 0; i < json_customer.getUserlist().Count; i++)
+                var x = new option[json_customer.getUserlist().Count];
+                for (int i = 0, j = 0; i < json_customer.getUserlist().Count; i++)
                 {
-                    //if (json_customer.getUserlist()[i].role != "admin")
-                    //{
-                        x[i] = new option
+                    if (json_customer.getUserlist()[i].role != "admin")
+                    {
+                        x[j++] = new option
                         {
                             printToConsole = $"{json_customer.getUserlist()[i].username}",
                             func = Delete(json_customer.getUserlist()[i])
                         };
-                    //}
+                    }
                 }
                 x[x.Length - 1] = new option
                 {
@@ -765,10 +768,11 @@ Change Creditcard  ");
                 Console.WriteLine("What is the name of the dish:");
                 string name = Console.ReadLine();
                 Console.WriteLine("What is the price of the dish:");
-                var price = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("Add a description here:");
-                string description = Console.ReadLine();
-                Dish dish = new Dish()
+                try { 
+                    Double price = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("Add a description here:");
+                    string description = Console.ReadLine();
+                    Dish dish = new Dish()
                     {
                         Title = name,
                         Price = (float)price,
@@ -776,9 +780,15 @@ Change Creditcard  ");
                         Spotlighted = false,
                         Categories = new List<string>(),
                         Stock = 0
-                };
-                json_dish.addDish(dish)();
-                Main();
+                    };
+                    json_dish.addDish(dish)();
+                    new MenuHandler().userMain();
+                }
+                catch { 
+                    Console.WriteLine("Invalid Input! adding dish canceld\n Press Enter to continue...");
+                    Console.ReadKey();
+                    new MenuHandler().userMain();
+                }
             }
 
             private Action listSettingsDish(Dish dish)
@@ -1737,7 +1747,7 @@ Change Creditcard  ");
             {
                 void f()
                 {
-                    data.RemoveAll(i => i.Title == dish.Title);
+                    data.Remove(dish);
                     Overview(data)();
                 }
                 return f;
@@ -1794,7 +1804,7 @@ Change Creditcard  ");
                         {
                             Console.WriteLine("Invalid Creditcard number!\nPress a Key to continue...");
                             Console.ReadKey();
-                            this.takeaway3(dishes, date);
+                            this.takeaway3(dishes, date)();
                         }
                     }
                     else
@@ -1816,7 +1826,7 @@ Change Creditcard  ");
                             {
                                 Console.WriteLine("Invalid Creditcard number!\nPress a Key to continue...");
                                 Console.ReadKey();
-                                this.takeaway3(dishes, date);
+                                this.takeaway3(dishes, date)();
                             }
                         }
                         else
@@ -1841,7 +1851,7 @@ Change Creditcard  ");
                                 {
                                     Console.WriteLine("Invalid Creditcard number!\nPress a Key to continue...");
                                     Console.ReadKey();
-                                    this.takeaway3(dishes, date);
+                                    this.takeaway3(dishes, date)();
                                 }
                             }
 
